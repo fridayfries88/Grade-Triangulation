@@ -32,18 +32,13 @@ public class NewClass extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet NewServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try {
+            request.getRequestDispatcher("/WEB-INF/new-class.html").include(request, response);
+        } catch (IOException e) {
+            System.err.println("Error: " + e);
         }
+        
+        request.getParameter("submit");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,14 +53,7 @@ public class NewClass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            request.getRequestDispatcher("/WEB-INF/new-class.html").include(request, response);
-            //response.getWriter().println("<html><body>New Text\n<button type=\"button\" onclick=\"window.location='/home'\">Home</button><body><html>");
-        } catch (IOException e) {
-            System.err.println("Error: " + e);
-        }
-        
-        request.getParameter("submit");
+        processRequest(request, response);
     }
 
     /**
