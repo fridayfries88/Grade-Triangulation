@@ -1,4 +1,4 @@
-package alexshruthika.webapptestjakarta10;
+package alexshruthika.webapp;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -7,6 +7,7 @@ package alexshruthika.webapptestjakarta10;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +17,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author alexp
  */
-public class NewServlet extends HttpServlet {
+public class NewClass extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -56,7 +58,14 @@ public class NewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            request.getRequestDispatcher("/WEB-INF/new-class.html").include(request, response);
+            //response.getWriter().println("<html><body>New Text\n<button type=\"button\" onclick=\"window.location='/home'\">Home</button><body><html>");
+        } catch (IOException e) {
+            System.err.println("Error: " + e);
+        }
+        
+        request.getParameter("submit");
     }
 
     /**
