@@ -5,13 +5,10 @@ package alexshruthika.webapp;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 /**
  *
@@ -33,17 +30,13 @@ public class NewClass extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            if (request.getParameter("submit") != null) {
+            if (!(request.getParameter("courseCode") == null || request.getParameter("studentName") == null)) {
                 response.getWriter().println("<html>\n<p>" + request.getParameter("courseCode") + "</p>\n</html>");
-                System.out.println("output: " + request.getParameter("courseCode"));
             }
             request.getRequestDispatcher("/WEB-INF/new-class.html").include(request, response);
-//            request.setAttribute("output", request.getParameter("courseCode"));
         } catch (IOException e) {
             System.err.println("Error: " + e);
         }
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
