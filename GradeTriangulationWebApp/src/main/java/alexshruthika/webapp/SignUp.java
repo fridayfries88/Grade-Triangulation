@@ -1,11 +1,11 @@
-package alexshruthika.webapp;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package alexshruthika.webapp;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
@@ -14,8 +14,7 @@ import jakarta.servlet.http.*;
  *
  * @author alexp
  */
-public class NewClass extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+public class SignUp extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,10 +28,8 @@ public class NewClass extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        if (!(request.getParameter("courseCode") == null || request.getParameter("studentName") == null)) {
-            response.getWriter().println("<html>\n<p>" + request.getParameter("courseCode") + "</p>\n</html>");
-        }
-        request.getRequestDispatcher("/WEB-INF/new-class.html").include(request, response);
+        request.getRequestDispatcher("/WEB-INF/sign-up.html").include(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,7 +68,7 @@ public class NewClass extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Web page for creating a new class of students";
+        return "Short description";
     }// </editor-fold>
 
 }

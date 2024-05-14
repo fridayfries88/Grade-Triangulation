@@ -4,9 +4,25 @@
         <servlet-name>NewClass</servlet-name>
         <servlet-class>alexshruthika.webapp.NewClass</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SignUp</servlet-name>
+        <servlet-class>alexshruthika.webapp.SignUp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>YourClasses</servlet-name>
+        <servlet-class>alexshruthika.webapp.YourClasses</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewClass</servlet-name>
         <url-pattern>/new-class</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignUp</servlet-name>
+        <url-pattern>/sign-up</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>YourClasses</servlet-name>
+        <url-pattern>/YourClasses</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
