@@ -12,10 +12,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <body>
         <div>
             <h1>Create a new class</h1>
-            <form>
+            <form action="new-class" method="post">
                 <p>Course Code:</p>
-                <input type="text" id="courseCode">
-                <button type="button" id="submit" onclick="">Create</button>
+                <input type="text" name="courseCode">
+                <button type="submit" name="submit">Create</button>
                 <p id="output">Text</p>
             </form>
         </div>

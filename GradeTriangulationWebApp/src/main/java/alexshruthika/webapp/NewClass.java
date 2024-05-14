@@ -33,8 +33,12 @@ public class NewClass extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            if (request.getParameter("submit") != null) {
+                response.getWriter().println("<html>\n<p>" + request.getParameter("courseCode") + "</p>\n</html>");
+                System.out.println("output: " + request.getParameter("courseCode"));
+            }
             request.getRequestDispatcher("/WEB-INF/new-class.html").include(request, response);
-            request.setAttribute("output", request.getParameter("courseCode"));
+//            request.setAttribute("output", request.getParameter("courseCode"));
         } catch (IOException e) {
             System.err.println("Error: " + e);
         }
