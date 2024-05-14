@@ -34,11 +34,12 @@ public class NewClass extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             request.getRequestDispatcher("/WEB-INF/new-class.html").include(request, response);
+            request.setAttribute("output", request.getParameter("courseCode"));
         } catch (IOException e) {
             System.err.println("Error: " + e);
         }
         
-        request.getParameter("submit");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
