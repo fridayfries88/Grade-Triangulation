@@ -2,15 +2,15 @@
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
         <servlet-name>NewClass</servlet-name>
-        <servlet-class>alexshruthika.webapp.NewClass</servlet-class>
+        <servlet-class>alexshruthika.webapp.servlets.NewClass</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SignUp</servlet-name>
-        <servlet-class>alexshruthika.webapp.SignUp</servlet-class>
+        <servlet-class>alexshruthika.webapp.servlets.SignUp</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>YourClasses</servlet-name>
-        <servlet-class>alexshruthika.webapp.YourClasses</servlet-class>
+        <servlet-class>alexshruthika.webapp.servlets.YourClasses</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NewClass</servlet-name>

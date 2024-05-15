@@ -31,11 +31,12 @@ public class NewClass extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String courseCode = request.getParameter("courseCode");
         String numStudents = request.getParameter("numStudents");
-        if (courseCode != null && Integer.parseInt(numStudents) > 0) {
-            request.setAttribute("courseCode", "");
-            response.getWriter().println("<html>\n<p>" + courseCode + " " + numStudents + "</p>\n</html>");
-        }
         request.getRequestDispatcher("/WEB-INF/new-class.jsp").include(request, response);
+        try {
+            if (courseCode != null && !courseCode.isEmpty() && Integer.parseInt(numStudents) > 0) {
+                response.getWriter().println(courseCode + " " + numStudents);
+            }
+        } catch (NumberFormatException e) {}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
