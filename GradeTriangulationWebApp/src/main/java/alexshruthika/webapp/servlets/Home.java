@@ -1,23 +1,19 @@
-package alexshruthika.webapp.servlets;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package alexshruthika.webapp.servlets;
 
 import java.io.*;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 
-import alexshruthika.webapp.servlets.AddStudents;
-
 /**
  *
  * @author alexp
  */
-public class NewClass extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+public class Home extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,16 +27,11 @@ public class NewClass extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String courseCode = request.getParameter("courseCode");
-        String numStudents = request.getParameter("numStudents");
-        request.getRequestDispatcher("/WEB-INF/new-class.jsp").include(request, response);
-        try {
-            if (courseCode != null && !courseCode.isEmpty() && Integer.parseInt(numStudents) > 0) {
-                response.getWriter().println(courseCode + " " + numStudents);
-                response.sendRedirect("/add-students");
-            }
-        } catch (NumberFormatException e) {}
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String showPassword = request.getParameter("showPassword");
         
+        request.getRequestDispatcher("/WEB-INF/home.jsp").include(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,7 +70,7 @@ public class NewClass extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Web page for creating a new class of students";
+        return "Short description";
     }// </editor-fold>
 
 }
