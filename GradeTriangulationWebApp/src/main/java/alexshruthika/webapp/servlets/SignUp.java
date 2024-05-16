@@ -28,7 +28,7 @@ public class SignUp extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("/WEB-INF/sign-up.html").include(request, response);
+        request.getRequestDispatcher("/WEB-INF/sign-up.jsp").include(request, response);
         
     }
 
