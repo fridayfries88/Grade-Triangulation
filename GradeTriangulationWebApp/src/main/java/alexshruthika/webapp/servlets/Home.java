@@ -27,9 +27,24 @@ public class Home extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String usernames[] = new String[]{"apych1", "svell1"};
+        String passwords[] = new String[]{"1234", "1234"};
+        
+        
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String showPassword = request.getParameter("showPassword");
+        if (username != null && password != null) {
+            for (int i = 0; i < usernames.length; i++) {
+                if (username.equals(usernames[i])){
+                    if (password.equals(passwords[i])) {
+                        response.sendRedirect("/new-class");
+                        return;
+                    }
+                    break;
+                }
+            }
+        }
+        
         
         request.getRequestDispatcher("/WEB-INF/home.jsp").include(request, response);
     }

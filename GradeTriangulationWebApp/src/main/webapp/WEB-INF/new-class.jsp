@@ -15,7 +15,7 @@
     <body>
         <div>
             <h1>Create a new class</h1>
-            <form action="new-class" method="get">
+            <form action="new-class" method="post">
                 Course Code: <br>
                 <input type="text" name="courseCode" value='<%=request.getParameter("courseCode") == null ? "" : request.getParameter("courseCode")%>'>
                 <br>
