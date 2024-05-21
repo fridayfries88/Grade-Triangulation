@@ -20,7 +20,12 @@
                 <input type="text" name="courseCode" value='<%=request.getParameter("courseCode") == null ? "" : request.getParameter("courseCode")%>'>
                 <br>
                 Number of Students: <br>
-                <input type="number" name="numStudents" value='<%=request.getParameter("numStudents")%>' width="50">
+                <input type="number" name="numStudents" value='<%=
+                    (request.getParameter("numStudents") == null
+                  || request.getParameter("numStudents").isEmpty() ? ""
+                  : (Integer.parseInt(request.getParameter("numStudents")) <= 0 ? 1
+                  : (Integer.parseInt(request.getParameter("numStudents")) > 50 ? 50
+                  : request.getParameter("numStudents")))) %>' width="50">
                 <br><br>
                 <button type="submit" name="create">Create</button>
             </form>

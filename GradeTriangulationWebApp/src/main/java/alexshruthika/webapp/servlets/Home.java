@@ -37,6 +37,7 @@ public class Home extends HttpServlet {
             for (int i = 0; i < usernames.length; i++) {
                 if (username.equals(usernames[i])){
                     if (password.equals(passwords[i])) {
+                        // make httpSession stuff
                         response.sendRedirect("/new-class");
                         return;
                     }

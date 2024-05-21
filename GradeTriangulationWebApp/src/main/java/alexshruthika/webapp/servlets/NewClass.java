@@ -6,11 +6,12 @@ package alexshruthika.webapp.servlets;
  */
 
 import java.io.*;
+import java.sql.*;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 
-import alexshruthika.webapp.servlets.AddStudents;
+import alexshruthika.webapp.DatabaseConnection;
 
 /**
  *
@@ -30,17 +31,29 @@ public class NewClass extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         String courseCode = request.getParameter("courseCode");
         String numStudents = request.getParameter("numStudents");
-        request.getRequestDispatcher("/WEB-INF/new-class.jsp").include(request, response);
+        request.getRequestDispatcher("/WEB-INF/new-class.jsp").forward(request, response);
         try {
-            if (courseCode != null && !courseCode.isEmpty() && Integer.parseInt(numStudents) > 0) {
-                response.getWriter().println(courseCode + " " + numStudents);
+            if (courseCode != null && !courseCode.isEmpty()) {
+                createClass(courseCode);
                 response.sendRedirect("/add-students");
             }
         } catch (NumberFormatException e) {}
         
+    }
+    
+    private void createClass(String courseCode) {
+        try {
+            Connection con = DatabaseConnection.initDatabase();
+            PreparedStatement st = con.prepareStatement("insert into ");
+            st.setString(0, courseCode);
+            
+        } catch (Exception e) { 
+            System.err.println("Error: " + e);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
