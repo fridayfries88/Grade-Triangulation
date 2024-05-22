@@ -15,7 +15,7 @@
     <center>
         <h1>Welcome to Grade Triangulation</h1>
         <p>Log in or sign up</p>
-        <form method="post" action="home">
+        <form method="post" action="login">
             Username: <input name="username" type="text" required> 
             <br>
             Password: <input id="password" name="password" type="password" required>

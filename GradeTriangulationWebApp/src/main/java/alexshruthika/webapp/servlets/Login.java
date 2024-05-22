@@ -5,15 +5,17 @@
 package alexshruthika.webapp.servlets;
 
 import java.io.*;
+import java.sql.*;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 
+import alexshruthika.webapp.DatabaseConnection;
 /**
  *
  * @author alexp
  */
-public class Home extends HttpServlet {
+public class Login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,27 +29,28 @@ public class Home extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String usernames[] = new String[]{"apych1", "svell1"};
-        String passwords[] = new String[]{"1234", "1234"};
-        
-        
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        if (username != null && password != null) {
-            for (int i = 0; i < usernames.length; i++) {
-                if (username.equals(usernames[i])){
-                    if (password.equals(passwords[i])) {
-                        // make httpSession stuff
-                        response.sendRedirect("/new-class");
-                        return;
-                    }
-                    break;
-                }
+        try {
+            // connect to database and prepare statement to retrieve password given username
+            Connection con = DatabaseConnection.initDatabase();
+            PreparedStatement st = con.prepareStatement("select password from user where username =?");
+            // insert inputted username into statement
+            st.setString(1, request.getParameter("username"));
+            System.err.println(st.toString());
+            ResultSet result = st.executeQuery();
+            result.next();
+            // check if inputted password equals password in users table
+            if (result.getString("password").equals(request.getParameter("password"))) {
+                // make httpSession stuff
+                request.getSession().setAttribute("uname", request.getParameter("username"));
+                
+                // send user to next page
+                response.sendRedirect("/new-class");
+                return;
             }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
         }
-        
-        
-        request.getRequestDispatcher("/WEB-INF/home.jsp").include(request, response);
+        request.getRequestDispatcher("/WEB-INF/login.jsp").include(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

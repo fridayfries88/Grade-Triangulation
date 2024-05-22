@@ -35,13 +35,20 @@ public class NewClass extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String courseCode = request.getParameter("courseCode");
         String numStudents = request.getParameter("numStudents");
-        request.getRequestDispatcher("/WEB-INF/new-class.jsp").forward(request, response);
+        
         try {
-            if (courseCode != null && !courseCode.isEmpty()) {
-                createClass(courseCode);
+            if (courseCode == null || courseCode.isEmpty()
+             || Integer.parseInt(numStudents) < 1 || Integer.parseInt(numStudents) > 50) {
+                request.getRequestDispatcher("/WEB-INF/new-class.jsp").forward(request, response);
+            } else {
+                //createClass(courseCode);
                 response.sendRedirect("/add-students");
             }
-        } catch (NumberFormatException e) {}
+        } catch (NumberFormatException e) {
+            request.getRequestDispatcher("/WEB-INF/new-class.jsp").forward(request, response);
+            response.getWriter().println("Hello " + (String)request.getSession().getAttribute("uname"));
+        }
+        
         
     }
     
@@ -49,7 +56,7 @@ public class NewClass extends HttpServlet {
         try {
             Connection con = DatabaseConnection.initDatabase();
             PreparedStatement st = con.prepareStatement("insert into ");
-            st.setString(0, courseCode);
+            st.setString(1, courseCode);
             
         } catch (Exception e) { 
             System.err.println("Error: " + e);
