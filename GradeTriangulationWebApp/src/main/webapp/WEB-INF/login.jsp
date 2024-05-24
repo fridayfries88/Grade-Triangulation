@@ -16,13 +16,12 @@
         <h1>Welcome to Grade Triangulation</h1>
         <p>Log in or sign up</p>
         <form method="post" action="login">
-            Username: <input name="username" type="text" required> 
+            Username: <input name="username" type="text" value='<%=request.getAttribute("username") == null ? "" : request.getAttribute("username")%>' required> 
             <br>
             Password: <input id="password" name="password" type="password" required>
-            <input type="checkbox" onclick="togglePassword()">
-            <br>
+            <input type="checkbox" onclick="togglePassword()"> <br>
             <button type="submit">Log In</button>
-            <br> <br>
+            <p><%=request.getAttribute("error")%></p> <!-- TODO: Make Red -->
             <button type="button" onclick="window.location='/sign-up'">No Account? Sign Up Here</button>
         </form>
     </center> 

@@ -9,8 +9,8 @@
         <servlet-class>alexshruthika.webapp.servlets.SignUp</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>YourClasses</servlet-name>
-        <servlet-class>alexshruthika.webapp.servlets.YourClasses</servlet-class>
+        <servlet-name>Classes</servlet-name>
+        <servlet-class>alexshruthika.webapp.servlets.Classes</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddStudents</servlet-name>
@@ -29,8 +29,8 @@
         <url-pattern>/sign-up</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>YourClasses</servlet-name>
-        <url-pattern>/YourClasses</url-pattern>
+        <servlet-name>Classes</servlet-name>
+        <url-pattern>/classes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddStudents</servlet-name>

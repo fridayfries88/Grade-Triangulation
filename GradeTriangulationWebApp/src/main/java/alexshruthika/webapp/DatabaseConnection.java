@@ -13,8 +13,7 @@ import java.sql.*;
  * @author alexp
  */
 public class DatabaseConnection {
-    public static Connection initDatabase() throws SQLException
-                                                    , ClassNotFoundException {
+    public static Connection init() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(
                 "jdbc:mysql://localhost:3006/gradetriangulation"

@@ -28,28 +28,34 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String message = "";
         response.setContentType("text/html;charset=UTF-8");
-        try {
+        
+        checkUsername: try {
+            if (request.getParameter("username") == null)
+                break checkUsername;
             // connect to database and prepare statement to retrieve password given username
-            Connection con = DatabaseConnection.initDatabase();
-            PreparedStatement st = con.prepareStatement("select password from user where username =?");
+            Connection con = DatabaseConnection.init();
+            PreparedStatement st = con.prepareStatement("select password, id from users where username =?");
             // insert inputted username into statement
             st.setString(1, request.getParameter("username"));
-            System.err.println(st.toString());
             ResultSet result = st.executeQuery();
             result.next();
             // check if inputted password equals password in users table
             if (result.getString("password").equals(request.getParameter("password"))) {
-                // make httpSession stuff
-                request.getSession().setAttribute("uname", request.getParameter("username"));
+                // add user id to http session data
+                request.getSession().setAttribute("user_id", result.getInt("id"));
                 
                 // send user to next page
                 response.sendRedirect("/new-class");
                 return;
             }
+            message = "Password is Incorrect";
+            request.setAttribute("username", request.getParameter("username"));
         } catch (Exception e) {
-            System.err.println("Error: " + e);
+            message = "Invalid Username";
         }
+        request.setAttribute("error", message);
         request.getRequestDispatcher("/WEB-INF/login.jsp").include(request, response);
     }
 

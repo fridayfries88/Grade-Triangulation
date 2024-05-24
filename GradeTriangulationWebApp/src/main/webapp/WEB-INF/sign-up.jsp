@@ -14,19 +14,19 @@
     <body>
     <center>
         <h1>Welcome to Grade Triangulation</h1>
-        <p>Log in or sign up</p>
+        <p>Sign up here</p>
         <form method="post" action="home">
-            Username: <input name="username" type="text" required> 
+            Username: <input name="username" type="text" value='<%=request.getAttribute("username")%>'> 
             <br>
-            Password: <input id="password" name="password" type="password" required>
-            <input type="checkbox" onclick="togglePassword('password')">
+            Password: <input id="password" name="password" type="password" value='<%=request.getAttribute("username")%>'>
+            <input name="showPassword" type="checkbox" onclick="togglePassword('password')" value='<%=request.getParameter("showPassword")%>'>
             <br>
-            Confirm: <input id="confirmPassword" name="confirmPassword" type="password" required>
-            <input type="checkbox" onclick="togglePassword('confirmPassword')">
-            <br>
-            <button type="submit">Sign Up</button>
+            Confirm: <input id="confirmPassword" name="confirmPassword" type="password" value='<%=request.getAttribute("username")%>'>
+            <input name="showConfirm" type="checkbox" onclick="togglePassword('confirmPassword')" value='<%=request.getParameter("showConfirm")%>'>
+            <p><%=request.getAttribute("error")%></p> <!-- TODO: Make red -->
+            <button type="submit">Create Account</button>
             <br> <br>
-            <button type="button" onclick="window.location='/home/sign-up'">No Account? Sign Up Here</button>
+            <button type="button" onclick="window.location='/login'">Already have an account? Login here</button>
         </form>
     </center> 
     </body>

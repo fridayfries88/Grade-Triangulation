@@ -12,12 +12,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 
 import alexshruthika.webapp.DatabaseConnection;
+import alexshruthika.webapp.PrivateServlet;
 
 /**
  *
  * @author alexp
  */
-public class NewClass extends HttpServlet {
+public class NewClass extends PrivateServlet {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -29,6 +30,7 @@ public class NewClass extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -46,50 +48,22 @@ public class NewClass extends HttpServlet {
             }
         } catch (NumberFormatException e) {
             request.getRequestDispatcher("/WEB-INF/new-class.jsp").forward(request, response);
-            response.getWriter().println("Hello " + (String)request.getSession().getAttribute("uname"));
+            response.getWriter().println("<html>Hello " + (String)request.getSession().getAttribute("uname") + "<html>");
         }
         
         
     }
     
-    private void createClass(String courseCode) {
+    private void createClass(String courseCode, HttpSession session) {
         try {
-            Connection con = DatabaseConnection.initDatabase();
-            PreparedStatement st = con.prepareStatement("insert into ");
-            st.setString(1, courseCode);
+            Connection con = DatabaseConnection.init();
+            PreparedStatement st = con.prepareStatement(
+                "insert into classes (user_id, course_code) values (?, ?)");
+            st.setInt(1, (Integer)session.getAttribute("user_id"));
             
         } catch (Exception e) { 
             System.err.println("Error: " + e);
         }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
