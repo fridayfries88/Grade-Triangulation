@@ -30,35 +30,71 @@ public class SignUp extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String message = "";
-        String username = request.getParameter("username");
-        if ((message = checkValidUsername(username, message)).isEmpty()) {
-            // continue
-        }
-        
-        String password = request.getParameter("password");
-        if (!password.equals(request.getParameter("confirmPassword"))) {
-            message = "Passwords do not match";
-        }
-        
-        request.setAttribute("error", message);
+        request.setAttribute("error", checkForm(request, response));
         request.getRequestDispatcher("/WEB-INF/sign-up.jsp").include(request, response);
     }
     
-    private String checkValidUsername(String username, String message) {
-        if (username.length() >= 50)
-            return "Username is too long.";
+    private String checkForm(HttpServletRequest request, HttpServletResponse response) {
+        String message;
+        // retrieve inputs from form
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
+        // erase inputs and error from form
+        request.setAttribute("username", "");
+        request.setAttribute("password", "");
+        request.setAttribute("confirmPassword", "");
+        request.setAttribute("error", "");
+        request.setAttribute("focused", "username");
+        // check if username and password are valid
+        if ((message = checkValidUsername(username, request)) != null
+         || (message = checkValidPassword(password, confirmPassword, request)) != null)
+            return message;
+        // if no error, create user and return empty error message
+        createUser(username, password, request.getSession());
+        return "";
+    }
+    
+    private String checkValidUsername(String username, HttpServletRequest request) {
+        // if no username, don't send error but don't create user either
+        if (username == null || username.isEmpty())
+            return "";
+        if (username.length() > 49)
+            return "Username must be less than 50 characters.";
         try {
+            // check if there's already a user with that name
             PreparedStatement st = DatabaseConnection.init().prepareStatement(
-                "select username from users where username=?");
+                "select id from users where username=?");
             st.setString(1, username);
-            st.executeQuery();
+            ResultSet result = st.executeQuery();
+            result.next();
+            result.getString("id");
+            
             // username is already in database
             return "Username is in use.";
-        } catch (SQLException | ClassNotFoundException e) {
-            // username does not exist in database
-            return message;
+        } catch (SQLException | ClassNotFoundException e) { // username does not exist in database
+            // focus password
+            request.setAttribute("focused", "password");
+            // keep username
+            request.setAttribute("username", username);
+            return null;
         }
+    }
+    
+    private String checkValidPassword(String password, String confirmPassword, HttpServletRequest request) {
+        if (password == null || password.isEmpty())
+            return "";
+        int pLength = password.length();
+        if (pLength < 5 || pLength > 49)
+            return "Password must be between 5 and 49 characters.";
+        // keep password
+        request.setAttribute("password", password);
+        if (!password.equals(confirmPassword)) {
+            // focus confirmPassword
+            request.setAttribute("focused", "confirmPassword");
+            return "Passwords do not match.";
+        }
+        return null;
     }
     
     private void createUser(String username, String password, HttpSession session) {
@@ -71,7 +107,7 @@ public class SignUp extends HttpServlet {
                 "insert into users (username, password) values (?, ?)");
             st.setString(1, username);
             st.setString(2, password);
-            st.executeQuery();
+            st.executeUpdate();
             
             // put user if in http session data
             st = con.prepareStatement(
@@ -81,7 +117,7 @@ public class SignUp extends HttpServlet {
             result.next();
             session.setAttribute("user_id", (String)result.getString("id"));
         } catch (SQLException | ClassNotFoundException e) {
-            
+            System.err.println("Unable to create user. Error: " + e);
         }
     }
 
