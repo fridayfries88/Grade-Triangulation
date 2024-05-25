@@ -51,7 +51,7 @@ public class SignUp extends HttpServlet {
          || (message = checkValidPassword(password, confirmPassword, request)) != null)
             return message;
         // if no error, create user and return empty error message
-        createUser(username, password, request.getSession());
+        createUser(username, password, request.getSession(), response);
         return "";
     }
     
@@ -97,7 +97,7 @@ public class SignUp extends HttpServlet {
         return null;
     }
     
-    private void createUser(String username, String password, HttpSession session) {
+    private void createUser(String username, String password, HttpSession session, HttpServletResponse response) {
         try {
             // connect to database
             Connection con = DatabaseConnection.init();
@@ -116,6 +116,11 @@ public class SignUp extends HttpServlet {
             ResultSet result = st.executeQuery();
             result.next();
             session.setAttribute("user_id", (String)result.getString("id"));
+            try {
+                response.sendRedirect("/classes");
+            } catch (IOException ioError) {
+                System.err.println("Error: " + ioError);
+            }
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Unable to create user. Error: " + e);
         }

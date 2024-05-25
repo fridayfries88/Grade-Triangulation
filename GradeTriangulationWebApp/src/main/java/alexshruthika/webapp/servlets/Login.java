@@ -47,13 +47,16 @@ public class Login extends HttpServlet {
                 request.getSession().setAttribute("user_id", result.getInt("id"));
                 
                 // send user to next page
-                response.sendRedirect("/new-class");
+                response.sendRedirect("/classes");
                 return;
             }
             message = "Password is Incorrect";
             request.setAttribute("username", request.getParameter("username"));
-        } catch (Exception e) {
-            message = "Invalid Username";
+        } catch (IOException | ClassNotFoundException | SQLException e) {
+            if (e instanceof SQLException)
+                message = "Invalid Username";
+            else
+                System.err.println("Error: " + e);
         }
         request.setAttribute("error", message);
         request.getRequestDispatcher("/WEB-INF/login.jsp").include(request, response);

@@ -33,8 +33,12 @@ public class Classes extends PrivateServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             Connection con = DatabaseConnection.init();
-            PreparedStatement st = con.prepareStatement("select * from ?");
-            st.setString(1, (String)request.getSession().getAttribute("username"));
+            PreparedStatement st = con.prepareStatement("select * from classes where user_id=?");
+            st.setString(1, (String)request.getSession().getAttribute("user_id"));
+            ResultSet result = st.executeQuery();
+            System.err.println(result);
+            result.next();
+            System.err.println(result);
         } catch (SQLException | ClassNotFoundException e) {
             
         }
