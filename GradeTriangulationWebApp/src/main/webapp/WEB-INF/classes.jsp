@@ -12,6 +12,8 @@
         <title>Your Classes</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+    <center>
+        <h1>Your Classes</h1>
+    </center>
     </body>
 </html>

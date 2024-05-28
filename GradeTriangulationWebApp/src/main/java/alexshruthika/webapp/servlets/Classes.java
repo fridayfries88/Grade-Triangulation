@@ -6,12 +6,14 @@ package alexshruthika.webapp.servlets;
 
 import java.sql.*;
 import java.io.*;
+import java.util.ArrayList;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 
 import alexshruthika.webapp.DatabaseConnection;
 import alexshruthika.webapp.PrivateServlet;
+import alexshruthika.webapp.Class;
 
 /**
  *
@@ -30,11 +32,20 @@ public class Classes extends PrivateServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ArrayList<Class> classes;
         response.setContentType("text/html;charset=UTF-8");
         try {
             Connection con = DatabaseConnection.init();
-            PreparedStatement st = con.prepareStatement("select * from ?");
-            st.setString(1, (String)request.getSession().getAttribute("username"));
+            PreparedStatement st = con.prepareStatement("select * from classes where username=?");
+            st.setInt(1, (Integer)request.getSession().getAttribute("user_id"));
+            ResultSet result = st.executeQuery();
+            classes = new ArrayList();
+            while (result.next()) {
+                classes.add(new Class(result));
+            }
+            if (classes.isEmpty()) {
+                response.getWriter().println("<html>You do not have any classes. Create one now.<html>");
+            }
         } catch (SQLException | ClassNotFoundException e) {
             
         }
