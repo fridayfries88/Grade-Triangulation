@@ -45,15 +45,15 @@ public class Class_ {
         }
     }
     
-    public HashMap<Integer, ArrayList<Criterium>> getStudentMarks(int student) {
-        HashMap<Integer, ArrayList<Criterium>> out = new HashMap();
+    public HashMap<Integer, Criterium[]> getStudentMarks(int student) {
+        HashMap<Integer, Criterium[]> out = new HashMap();
         for (Assignment i : assignments) {
             out.put(i.getId(), i.getStudentCriteria(student));
         }
         return out;
     }
     
-    public HashMap<Integer, ArrayList<Criterium>> getAssignmentMarks(int assignment) {
+    public HashMap<Integer, Criterium[]> getAssignmentMarks(int assignment) {
         return assignments.get(assignment).getAllCriteria();
     }
 }
