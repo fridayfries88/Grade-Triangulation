@@ -44,16 +44,19 @@ public class Login extends HttpServlet {
             // check if inputted password equals password in users table
             if (result.getString("password").equals(request.getParameter("password"))) {
                 // add user id to http session data
-                request.getSession().setAttribute("user_id", result.getInt("id"));
+                request.getSession().setAttribute("user_id", (Integer)result.getInt("id"));
                 
                 // send user to next page
-                response.sendRedirect("/new-class");
+                response.sendRedirect("/classes");
                 return;
             }
             message = "Password is Incorrect";
             request.setAttribute("username", request.getParameter("username"));
-        } catch (Exception e) {
-            message = "Invalid Username";
+        } catch (IOException | ClassNotFoundException | SQLException e) {
+            if (e instanceof SQLException)
+                message = "Invalid Username";
+            else
+                System.err.println("Error: " + e);
         }
         request.setAttribute("error", message);
         request.getRequestDispatcher("/WEB-INF/login.jsp").include(request, response);

@@ -13,7 +13,7 @@ import jakarta.servlet.http.*;
 
 import alexshruthika.webapp.DatabaseConnection;
 import alexshruthika.webapp.PrivateServlet;
-import alexshruthika.webapp.Class;
+import alexshruthika.webapp.Class_;
 
 /**
  *
@@ -32,7 +32,7 @@ public class Classes extends PrivateServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<Class> classes;
+        ArrayList<Class_> classes;
         response.setContentType("text/html;charset=UTF-8");
         try {
             Connection con = DatabaseConnection.init();
@@ -41,7 +41,7 @@ public class Classes extends PrivateServlet {
             ResultSet result = st.executeQuery();
             classes = new ArrayList();
             while (result.next()) {
-                classes.add(new Class(result));
+                classes.add(new Class_(result));
             }
             if (classes.isEmpty()) {
                 response.getWriter().println("<html>You do not have any classes. Create one now.<html>");

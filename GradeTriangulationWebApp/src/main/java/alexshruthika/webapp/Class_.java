@@ -12,13 +12,13 @@ import java.util.HashMap;
  *
  * @author alexp
  */
-public class Class {
+public class Class_ {
     private String courseCode;
     private int id;
     private ArrayList<Student> students;
     private ArrayList<Assignment> assignments;
     
-    public Class(ResultSet result) {
+    public Class_(ResultSet result) {
         try {
             courseCode = result.getString("courseCode");
             id = result.getInt("id");
