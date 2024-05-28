@@ -4,6 +4,7 @@
  */
 package alexshruthika.webapp;
 
+import java.sql.*;
 import java.util.Arrays;
 import java.util.ArrayList;
 
@@ -50,5 +51,9 @@ public class Criterium<T> {
         if (!options.contains(value)) {
             addOption(value);
         }
+    }
+    
+    public static ArrayList<Criterium> generate(ResultSet result) {
+        return null;
     }
 }

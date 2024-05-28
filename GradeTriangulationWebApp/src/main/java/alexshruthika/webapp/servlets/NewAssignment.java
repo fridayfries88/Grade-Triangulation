@@ -19,7 +19,7 @@ import alexshruthika.webapp.Criterium;
  *
  * @author alexp
  */
-public class NewAssignment extends HttpServlet {
+public class NewAssignment extends PrivateServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

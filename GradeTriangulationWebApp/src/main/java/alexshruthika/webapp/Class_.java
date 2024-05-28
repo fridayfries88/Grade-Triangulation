@@ -45,15 +45,15 @@ public class Class_ {
         }
     }
     
-    public HashMap<Integer, MarkSet> getStudentMarkSets(int student) {
-        HashMap<Integer, MarkSet> out = new HashMap();
+    public HashMap<Integer, ArrayList<Criterium>> getStudentMarks(int student) {
+        HashMap<Integer, ArrayList<Criterium>> out = new HashMap();
         for (Assignment i : assignments) {
-            out.put(i.getId(), i.getMarkSet(student));
+            out.put(i.getId(), i.getStudentCriteria(student));
         }
         return out;
     }
     
-    public HashMap<Integer, MarkSet> getAssignmentMarkSets(int assignment) {
-        return assignments.get(assignment).getMarkSets();
+    public HashMap<Integer, ArrayList<Criterium>> getAssignmentMarks(int assignment) {
+        return assignments.get(assignment).getAllCriteria();
     }
 }

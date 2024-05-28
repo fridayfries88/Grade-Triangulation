@@ -5,6 +5,7 @@
 package alexshruthika.webapp;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -14,7 +15,7 @@ import java.util.HashMap;
 public class Assignment {
     private String type, name;
     private int id, classId, userId;
-    private HashMap<Integer, MarkSet> markSets;
+    private HashMap<Integer, ArrayList<Criterium>> criteria;
     
     public Assignment(ResultSet result) {
         try {
@@ -24,25 +25,25 @@ public class Assignment {
             classId = result.getInt("classId");
             userId = result.getInt("userId");
             
-            markSets = new HashMap();
+            criteria = new HashMap();
             PreparedStatement st = DatabaseConnection.init().prepareStatement(
             "select * from ?");
             st.setString(1, "assignment" + id);
             ResultSet markResult = st.executeQuery();
             while (markResult.next()) {
-                markSets.put((Integer)result.getInt("student_id"), new MarkSet(result));
+                criteria.put((Integer)result.getInt("student_id"), Criterium.generate(result));
             }
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Error: " + e);
         }
     }
     
-    public HashMap<Integer, MarkSet> getMarkSets() {
-        return markSets;
+    public HashMap<Integer, ArrayList<Criterium>> getAllCriteria() {
+        return criteria;
     }
     
-    public MarkSet getMarkSet(int student_id) {
-        return markSets.get(student_id);
+    public ArrayList<Criterium> getStudentCriteria(int student_id) {
+        return criteria.get(student_id);
     }
     
     public int getId() {
