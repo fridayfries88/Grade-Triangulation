@@ -37,9 +37,14 @@ public class NewClass extends PrivateServlet {
         String message = "";
         String focus = "courseCode";
         checks: {
-            String courseCode = request.getParameter("courseCode");
+            String courseCode;
             int year, semester, period, classID;
             String[] studentNames = new String[0];
+            
+            courseCode = request.getParameter("courseCode");
+            if (courseCode == null || courseCode.isEmpty()) {
+                break checks;
+            }
             
             year = getYear(request.getParameter("year"));
             if (year == -1) {
@@ -72,6 +77,7 @@ public class NewClass extends PrivateServlet {
                 response.sendRedirect("/assignments?classID=" + classID);
             return;
         }
+        System.err.println(focus);
         request.setAttribute("message", message);
         request.setAttribute("focused", focus);
         request.getRequestDispatcher("/WEB-INF/new-class.jsp").include(request, response);
@@ -115,7 +121,7 @@ public class NewClass extends PrivateServlet {
             // add class to table
             PreparedStatement st = con.prepareStatement(
                     "insert into classes (user_id, course_code, year, semester, period) values (?, ?, ?, ?, ?)");
-            st.setInt(1, (Integer)session.getAttribute("user_id"));
+            st.setInt(1, (Integer)session.getAttribute("userID"));
             st.setString(2, courseCode);
             st.setInt(3, year);
             st.setInt(4, semester);

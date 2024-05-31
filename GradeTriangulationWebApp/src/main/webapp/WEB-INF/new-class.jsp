@@ -30,7 +30,7 @@
                 3<input type="radio" name="period" value="3"> 
                 4<input type="radio" name="period" value="4"> <br>
                 Students: <br>
-                <textarea name="Students" 
+                <textarea name="students" 
                           onkeyup="textAreaAdjust(this)"
                           style="overflow:hidden"
                           placeholder="Firstname Lastname
