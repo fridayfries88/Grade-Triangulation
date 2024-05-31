@@ -19,7 +19,6 @@ import alexshruthika.webapp.PrivateServlet;
  * @author alexp
  */
 public class NewClass extends PrivateServlet {
-    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,35 +34,116 @@ public class NewClass extends PrivateServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
-        String courseCode = request.getParameter("courseCode");
-        String numStudents = request.getParameter("numStudents");
-        
-        try {
-            if (courseCode == null || courseCode.isEmpty()
-             || Integer.parseInt(numStudents) < 1 || Integer.parseInt(numStudents) > 50) {
-                request.getRequestDispatcher("/WEB-INF/new-class.jsp").forward(request, response);
-            } else {
-                //createClass(courseCode);
-                response.sendRedirect("/add-students");
+        String message = "";
+        String focus = "courseCode";
+        checks: {
+            String courseCode = request.getParameter("courseCode");
+            int year, semester, period, classID;
+            String[] studentNames = new String[0];
+            
+            year = getYear(request.getParameter("year"));
+            if (year == -1) {
+                focus = "year";
+                break checks;
             }
-        } catch (NumberFormatException e) {
-            request.getRequestDispatcher("/WEB-INF/new-class.jsp").forward(request, response);
-            response.getWriter().println("<html>Hello " + (String)request.getSession().getAttribute("uname") + "<html>");
+            
+            if (request.getParameter("semester") == null) {
+                message = "Choose semester.";
+                break checks;
+            }
+            semester = Integer.parseInt(request.getParameter("semester"));
+            
+            if (request.getParameter("period") == null) {
+                message = "Choose period.";
+                break checks;
+            }
+            period = Integer.parseInt(request.getParameter("period"));
+            
+            message = checkStudents(request.getParameter("students"), studentNames);
+            if (message != null) {
+                focus = "students";
+                break checks;
+            }
+            
+            classID = createClass(courseCode, year, semester, period, studentNames, request.getSession());
+            if (classID == -1)
+                response.sendRedirect("/classes");
+            else
+                response.sendRedirect("/assignments?classID=" + classID);
+            return;
         }
-        
-        
+        request.setAttribute("message", message);
+        request.setAttribute("focused", focus);
+        request.getRequestDispatcher("/WEB-INF/new-class.jsp").include(request, response);
     }
     
-    private void createClass(String courseCode, HttpSession session) {
+    private int getYear(String yearString) {
+        if (yearString == null || yearString.isEmpty()) {
+            return -1;
+        }
         try {
-            Connection con = DatabaseConnection.init();
+            return Integer.parseInt(yearString);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+    
+    // checks if students parameter is valid
+    // fills string array with names of students
+    // returns error message or null if no error
+    private String checkStudents(String students, String[] studentNames) {
+        boolean isEmpty = true;
+        studentNames = students.split("\n");
+        for (int i  = 0; i < studentNames.length; i++) {
+            studentNames[i] = studentNames[i].strip();
+            if (studentNames[i].isEmpty())
+                continue;
+            if (!studentNames[i].contains(" "))
+                return "All Students must have first and last name.";
+            isEmpty = false;
+        }
+        if (isEmpty)
+            return "No students found.";
+        return null;
+    }
+    
+    private int createClass(String courseCode, int year, int semester, int period, String[] studentNames, HttpSession session) {
+        int id = -1;
+        String[] splitName;
+        
+        try (Connection con = DatabaseConnection.init()) {
+            // add class to table
             PreparedStatement st = con.prepareStatement(
-                "insert into classes (user_id, course_code) values (?, ?)");
+                    "insert into classes (user_id, course_code, year, semester, period) values (?, ?, ?, ?, ?)");
             st.setInt(1, (Integer)session.getAttribute("user_id"));
-            
-        } catch (Exception e) { 
+            st.setString(2, courseCode);
+            st.setInt(3, year);
+            st.setInt(4, semester);
+            st.setInt(5, period);
+            st.executeUpdate();
+
+            // get id of created class by getting highest id since auto_increment
+            st = con.prepareStatement("select max(id) from classes");
+            ResultSet result = st.executeQuery();
+            result.next();
+            id = result.getInt("id");
+
+            // add all students to table
+            st = con.prepareStatement(
+                    "insert into students (student_class_id, first_name, last_name) values (?, ?, ?)");
+            for (String i : studentNames) {
+                if (i.isEmpty())
+                    continue;
+                splitName = i.split(" ");
+                st.setInt(1, id);
+                st.setString(2, splitName[0]);
+                st.setString(3, splitName[1]);
+                st.executeUpdate();
+            }
+        } catch (ClassNotFoundException | SQLException e) { 
             System.err.println("Error: " + e);
         }
+        return id;
     }
 
     /**

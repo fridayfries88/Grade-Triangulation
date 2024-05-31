@@ -31,6 +31,7 @@ public class Login extends HttpServlet {
         String message = "";
         response.setContentType("text/html;charset=UTF-8");
         
+        // try catch with breakpoint
         checkUsername: try {
             if (request.getParameter("username") == null)
                 break checkUsername;
@@ -44,7 +45,7 @@ public class Login extends HttpServlet {
             // check if inputted password equals password in users table
             if (result.getString("password").equals(request.getParameter("password"))) {
                 // add user id to http session data
-                request.getSession().setAttribute("user_id", (Integer)result.getInt("id"));
+                request.getSession().setAttribute("userID", (Integer)result.getInt("id"));
                 
                 // send user to next page
                 response.sendRedirect("/classes");
