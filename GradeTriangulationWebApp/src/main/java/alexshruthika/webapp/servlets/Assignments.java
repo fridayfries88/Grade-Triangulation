@@ -14,7 +14,7 @@ import alexshruthika.webapp.PrivateServlet;
 import alexshruthika.webapp.DatabaseConnection;
 
 /**
- *
+ * TODO: allow searching by unit and type
  * @author alexp
  */
 public class Assignments extends PrivateServlet {
