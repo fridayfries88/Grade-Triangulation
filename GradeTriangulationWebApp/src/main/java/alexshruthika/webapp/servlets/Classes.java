@@ -30,55 +30,40 @@ public class Classes extends PrivateServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<Class_> classes;
+        String classes = "";
         response.setContentType("text/html;charset=UTF-8");
         try {
-            Connection con = DatabaseConnection.init();
-            PreparedStatement st = con.prepareStatement("select * from classes where username=?");
-            st.setInt(1, (Integer)request.getSession().getAttribute("user_id"));
+            PreparedStatement st = DatabaseConnection.init().prepareStatement(
+                    "select * from classes where user_id=?");
+            st.setInt(1, (Integer)request.getSession().getAttribute("userID"));
             ResultSet result = st.executeQuery();
-            classes = new ArrayList();
             while (result.next()) {
-                classes.add(new Class_(result));
+                classes += makeClass(result);
             }
             if (classes.isEmpty()) {
-                response.getWriter().println("<html>You do not have any classes. Create one now.<html>");
+                classes = "You do not have any classes. <button onclick='window.location = \"/new-class\"'>Create one now.</button>";
+            } else {
+                classes += "<br><button onclick='window.location = \"/new-class\"'>Create new class</button>";
             }
+            request.setAttribute("classes", classes);
         } catch (SQLException | ClassNotFoundException e) {
-            
+            System.err.println("Error: " + e);
         }
         request.getRequestDispatcher("/WEB-INF/classes.jsp").include(request, response);
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    
+    private String makeClass(ResultSet result) throws SQLException {
+        return result.getString("course_code") + ","
+                + result.getInt("year") + ","
+                + "S" + result.getInt("semester") + ","
+                + "P" + result.getInt("period") + "<br>"
+              + "<button onclick=\"goToClass(\'" + result.getInt("id")
+                  + "', '/assignments')\">assignments</button>"
+              + "<button onclick=\"goToClass('" + result.getInt("id")
+                  + "', '/students')\">students</button><br><br>";
     }
 
     /**
@@ -88,7 +73,7 @@ public class Classes extends PrivateServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Shows all classes of user";
     }// </editor-fold>
 
 }

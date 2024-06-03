@@ -13,24 +13,47 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+    <center>
         <div>
             <h1>Create a new class</h1>
             <form action="new-class" method="post">
-                Course Code: <br>
-                <input type="text" name="courseCode" value='<%=
-                    request.getParameter("courseCode") == null? ""
-                  : request.getParameter("courseCode")%>' required>
-                <br>
-                Number of Students: <br>
-                <input type="number" name="numStudents" value='<%=
-                    (request.getParameter("numStudents") == null
-                  || request.getParameter("numStudents").isEmpty() ? ""
-                  : (Integer.parseInt(request.getParameter("numStudents")) <= 0 ? 1
-                  : (Integer.parseInt(request.getParameter("numStudents")) > 50 ? 50
-                  : request.getParameter("numStudents")))) %>' required>
-                <br><br>
+                Course Code:
+                <input type="text" name="courseCode" id="courseCode" size="10" required> <br>
+                Year:
+                <input type="number" name="year" id="year" min="2024" max="2100"> <br>
+                Semester:  
+                1<input type="radio" name="semester" value="1"> 
+                2<input type="radio" name="semester" value="2"> <br>
+                Period:
+                1<input type="radio" name="period" value="1"> 
+                2<input type="radio" name="period" value="2">
+                3<input type="radio" name="period" value="3"> 
+                4<input type="radio" name="period" value="4"> <br>
+                Students: <br>
+                <textarea name="students" 
+                          onkeyup="textAreaAdjust(this)"
+                          style="overflow:hidden"
+                          placeholder="Firstname Lastname
+Firstname Lastname..."
+                          cols="40" rows="4"></textarea>
+                          
+                <p><%=request.getAttribute("message")%></p>
                 <button type="submit" name="create">Create</button>
             </form>
         </div>
+    </center>
+    <script>
+        // put current year in form
+        if (document.getElementById("year").value === "")
+            document.getElementById("year").value = new Date().getFullYear();
+        
+        // focus input told by servlet
+        document.getElementById("<%=request.getAttribute("focused")%>").focus();
+        
+        function textAreaAdjust(textarea) {
+            textarea.style.height = "1px";   
+            textarea.style.height = (25 + textarea.scrollHeight)+"px"; 
+        }
+    </script>
     </body>
 </html>

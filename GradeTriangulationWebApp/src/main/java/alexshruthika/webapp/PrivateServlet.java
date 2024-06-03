@@ -29,7 +29,7 @@ public abstract class PrivateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // if user is not logged in, redirect them to login page
-        if (request.getSession().getAttribute("user_id") == null) {
+        if (request.getSession().getAttribute("userID") == null) {
             response.sendRedirect("/login");
             return;
         }
@@ -47,11 +47,10 @@ public abstract class PrivateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getSession().getAttribute("username") == null) {
+        if (request.getSession().getAttribute("userID") == null) {
             response.sendRedirect("/login");
             return;
         }
-        System.err.println(request.getSession().getAttribute("username"));
         processRequest(request, response);
     }
 }

@@ -31,7 +31,7 @@
     </center> 
     </body>
     <script>
-        <!-- focus input told by servlet -->
+        // focus input told by servlet
         document.getElementById("<%=request.getAttribute("focused")%>").focus();
         
         function togglePassword(id) {

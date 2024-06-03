@@ -115,7 +115,7 @@ public class SignUp extends HttpServlet {
             st.setString(1, username);
             ResultSet result = st.executeQuery();
             result.next();
-            session.setAttribute("user_id", (Integer)result.getInt("id"));
+            session.setAttribute("userID", (Integer)result.getInt("id"));
             try {
                 response.sendRedirect("/classes");
             } catch (IOException ioError) {

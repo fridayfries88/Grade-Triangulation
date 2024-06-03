@@ -14,6 +14,14 @@
     <body>
     <center>
         <h1>Your Classes</h1>
+        <%=request.getAttribute("classes")%>
+    
     </center>
+    <script>
+        function goToClass(id, location) {
+            window.location = location + "?classID=" + id;
+        }
+    </script>
     </body>
+    
 </html>
