@@ -6,26 +6,34 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Log In</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-    <center>
+
+
+    <meta charset="UTF-8">
+    <title>Log In</title>
+     <link rel="stylesheet" href="<c:url value='/Web Pages/styles/styles.css' />">
+
+
+<body>
+    <div class="login-container">
         <h1>Welcome to Grade Triangulation</h1>
-        <p>Log in or sign up</p>
+        <p>Please log in or sign up</p>
         <form method="post" action="login">
-            Username: <input name="username" type="text" value='<%=request.getAttribute("username") == null ? "" : request.getAttribute("username")%>' required> 
-            <br>
-            Password: <input id="password" name="password" type="password" required>
-            <input type="checkbox" onclick="togglePassword()"> <br>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input name="username" type="text" id="username" value='<%= request.getAttribute("username") == null ? "" : request.getAttribute("username") %>' required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" required>
+                <input type="checkbox" onclick="togglePassword()"> Show Password
+            </div>
             <button type="submit">Log In</button>
-            <p><%=request.getAttribute("error")%></p> <!-- TODO: Make Red -->
-            <button type="button" onclick="window.location='/sign-up'">No Account? Sign Up Here</button>
+            <div class="error-message">
+                <%= request.getAttribute("error") %>
+            </div>
         </form>
-    </center> 
-    </body>
+        <button class="signup-button" type="button" onclick="window.location='/sign-up'">No Account? Sign Up Here</button>
+    </div>
     <script>
         function togglePassword() {
             var password = document.getElementById("password");
@@ -36,4 +44,5 @@
             }
         }
     </script>
-</html>
+</body>
+
