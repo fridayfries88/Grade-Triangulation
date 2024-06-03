@@ -33,7 +33,7 @@ public class NewAssignment extends PrivateServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        request.getRequestDispatcher("/WEB-INF/new-assignment.jsp").include(request, response);
     }
     
     private void createAssignment(ArrayList<Criterium> criteria) {

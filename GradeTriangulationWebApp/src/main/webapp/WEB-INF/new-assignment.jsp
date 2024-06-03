@@ -12,11 +12,15 @@
         <title><%=request.getAttribute("courseCode")%> - New Assignment</title>
     </head>
     <body>
+    <center>
         <h1>Create a new assignment</h1>
         <form action="new-assignment" method="post">
             Type of assignment:
             <input type="text" name="type" required> <br>
+            Name:
+            <input type="text" name="name"> <br>
             
         </form>
+    </center>
     </body>
 </html>

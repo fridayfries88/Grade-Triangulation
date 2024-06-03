@@ -13,8 +13,8 @@
         <servlet-class>alexshruthika.webapp.servlets.Classes</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddStudents</servlet-name>
-        <servlet-class>alexshruthika.webapp.servlets.AddStudents</servlet-class>
+        <servlet-name>NewAssignment</servlet-name>
+        <servlet-class>alexshruthika.webapp.servlets.NewAssignment</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Login</servlet-name>
@@ -37,8 +37,8 @@
         <url-pattern>/classes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddStudents</servlet-name>
-        <url-pattern>/add-students</url-pattern>
+        <servlet-name>NewAssignment</servlet-name>
+        <url-pattern>/new-assignment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
