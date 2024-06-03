@@ -5,15 +5,12 @@
 package alexshruthika.webapp.servlets;
 
 import java.io.*;
-import java.sql.*;
-import java.util.ArrayList;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 
 import alexshruthika.webapp.DatabaseConnection;
 import alexshruthika.webapp.PrivateServlet;
-import alexshruthika.webapp.Criterium;
 
 /**
  *
@@ -33,11 +30,25 @@ public class NewAssignment extends PrivateServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String message = "";
+        String focus = "type";
+        checks: {
+            String type = request.getParameter("type");
+            String name = request.getParameter("name");
+        }
+        request.setAttribute("types", getTypes());
         request.getRequestDispatcher("/WEB-INF/new-assignment.jsp").include(request, response);
+
     }
     
-    private void createAssignment(ArrayList<Criterium> criteria) {
+    private void createAssignment() {
         
+    }
+    
+    private String getTypes() {
+        // eventually, this will access sql
+        return "<a onclick=\"setType(this)\">Type1</a>" +
+               "<a onclick=\"setType(this)\">Type2</a>";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

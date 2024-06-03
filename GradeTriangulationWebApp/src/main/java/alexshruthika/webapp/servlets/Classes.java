@@ -6,14 +6,12 @@ package alexshruthika.webapp.servlets;
 
 import java.sql.*;
 import java.io.*;
-import java.util.ArrayList;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 
 import alexshruthika.webapp.DatabaseConnection;
 import alexshruthika.webapp.PrivateServlet;
-import alexshruthika.webapp.Class_;
 
 /**
  *

@@ -14,6 +14,7 @@
 
 
 <body>
+<center>
     <div class="login-container">
         <h1>Welcome to Grade Triangulation</h1>
         <p>Please log in or sign up</p>
@@ -25,7 +26,7 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <input id="password" name="password" type="password" required>
-                <input type="checkbox" onclick="togglePassword()"> Show Password
+                <input type="checkbox" onclick="togglePassword()"> show
             </div>
             <button type="submit">Log In</button>
             <div class="error-message">
@@ -34,6 +35,7 @@
         </form>
         <button class="signup-button" type="button" onclick="window.location='/sign-up'">No Account? Sign Up Here</button>
     </div>
+</center>
     <script>
         function togglePassword() {
             var password = document.getElementById("password");
