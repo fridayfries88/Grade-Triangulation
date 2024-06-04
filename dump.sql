@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `assignment6`
+--
+
+DROP TABLE IF EXISTS `assignment6`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignment6` (
+  `student_id` int unsigned NOT NULL,
+  `Broke a beaker_Yes/No` varchar(100) DEFAULT NULL,
+  `Spilled chemicals_Yes/No` varchar(100) DEFAULT NULL,
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `student_id` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assignment6`
+--
+
+LOCK TABLES `assignment6` WRITE;
+/*!40000 ALTER TABLE `assignment6` DISABLE KEYS */;
+/*!40000 ALTER TABLE `assignment6` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `assignments`
 --
 
@@ -23,7 +48,7 @@ DROP TABLE IF EXISTS `assignments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `assignments` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `assignment_class_id` int unsigned NOT NULL,
   `type` varchar(20) DEFAULT NULL,
   `name` varchar(50) NOT NULL,
@@ -31,7 +56,7 @@ CREATE TABLE `assignments` (
   PRIMARY KEY (`id`),
   KEY `class_id` (`assignment_class_id`),
   CONSTRAINT `class_id` FOREIGN KEY (`assignment_class_id`) REFERENCES `classes` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +65,7 @@ CREATE TABLE `assignments` (
 
 LOCK TABLES `assignments` WRITE;
 /*!40000 ALTER TABLE `assignments` DISABLE KEYS */;
+INSERT INTO `assignments` VALUES (1,3,'a','a',NULL),(3,3,'Project','Calculator',NULL),(4,3,'Lab','Acid Lab',NULL),(5,3,'Test','For loop test',NULL),(6,1,'Lab','Equilibrium Lab',NULL);
 /*!40000 ALTER TABLE `assignments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,6 +127,41 @@ LOCK TABLES `students` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `types`
+--
+
+DROP TABLE IF EXISTS `types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `types` (
+  `name` varchar(20) NOT NULL,
+  `1` varchar(100) DEFAULT NULL,
+  `2` varchar(100) DEFAULT NULL,
+  `3` varchar(100) DEFAULT NULL,
+  `4` varchar(100) DEFAULT NULL,
+  `5` varchar(100) DEFAULT NULL,
+  `6` varchar(100) DEFAULT NULL,
+  `7` varchar(100) DEFAULT NULL,
+  `8` varchar(100) DEFAULT NULL,
+  `9` varchar(100) DEFAULT NULL,
+  `10` varchar(100) DEFAULT NULL,
+  `11` varchar(100) DEFAULT NULL,
+  `12` varchar(100) DEFAULT NULL,
+  `13` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `types`
+--
+
+LOCK TABLES `types` WRITE;
+/*!40000 ALTER TABLE `types` DISABLE KEYS */;
+INSERT INTO `types` VALUES ('Yes/No','yes','no',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -134,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-02 14:02:01
+-- Dump completed on 2024-06-04 12:48:46

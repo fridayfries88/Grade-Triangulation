@@ -1,0 +1,4 @@
+Fix newClass so students are created
+make types
+
+make way to add/remove students *hard
