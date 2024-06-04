@@ -97,11 +97,11 @@
         function addRow() {
             var criteria = document.getElementById("criteria");
             var row = criteria.insertRow();
-            row.insertCell(0).innerHTML = '<input type="text" name="criterium' + criteria.rows.length + '">';
+            row.insertCell(0).innerHTML = '<input type="text" name="criterium' + (criteria.rows.length - 2) + '">';
             row.insertCell(1).innerHTML = 
                 '<div class="dropdown">'
-                + '<button name="type' + criteria.rows.length + '" type="button" class="dropbtn">[Type]</button>\n'
-                + '<input name="type' + criteria.rows.length + '" type="hidden" class="type">'
+                + '<button type="button" class="dropbtn">[Type]</button>\n'
+                + '<input name="type' + (criteria.rows.length - 2) + '" type="hidden" class="type">'
                 + '<div class="dropdown-content">\n'
                   + '<%=request.getAttribute("types")%>'
                   + '<a href="/new-type">New</a>'
