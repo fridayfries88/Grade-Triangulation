@@ -53,6 +53,7 @@ public class Assignments extends PrivateServlet {
             st.setInt(1, classID);
             ResultSet result = st.executeQuery();
             result.next();
+            request.getSession().setAttribute("courseCode", result.getString("course_code"));
             request.setAttribute("courseCode", result.getString("course_code"));
             request.setAttribute("classInfo", result.getString("course_code") + ","
                                             + result.getInt("year") + ","

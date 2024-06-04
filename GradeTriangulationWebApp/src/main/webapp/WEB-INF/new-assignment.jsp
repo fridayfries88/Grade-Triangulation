@@ -2,6 +2,7 @@
     Document   : new-assignment
     Created on : May 31, 2024, 2:07:16 p.m.
     Author     : alexp
+    TODO: make params not delete on incorrect entry
 --%>
 
 <style>
@@ -72,10 +73,11 @@
             <th>Type</th>
             </tr>
             <tr>
-                <td><input type="text" name="name1"></td>
+                <td><input type="text" name="criterium0"></td>
             <td>
             <div class="dropdown">
                 <button type="button" class="dropbtn">[Type]</button>
+                <input name="type0" type="hidden" class="type">
                 <div class="dropdown-content">
                   <%=request.getAttribute("types")%>
                   <a href="/new-type">New</a>
@@ -85,18 +87,21 @@
             </tr>
             </table>
             <input type="button" onclick="addRow()" value="Add Criterium">
-            <br><br>
+            <br><%=request.getAttribute("message")%><br>
             <input type="submit" value="Create Assignment">
         </form>
     </center>
     <script>
+        document.getElementById("<%=request.getAttribute("focused")%>").focus();
+        
         function addRow() {
             var criteria = document.getElementById("criteria");
             var row = criteria.insertRow();
-            row.insertCell(0).innerHTML = '<input type="text" name="name1">';
+            row.insertCell(0).innerHTML = '<input type="text" name="criterium' + criteria.rows.length + '">';
             row.insertCell(1).innerHTML = 
                 '<div class="dropdown">'
-                + '<button type="button" class="dropbtn">[Type]</button>\n'
+                + '<button name="type' + criteria.rows.length + '" type="button" class="dropbtn">[Type]</button>\n'
+                + '<input name="type' + criteria.rows.length + '" type="hidden" class="type">'
                 + '<div class="dropdown-content">\n'
                   + '<%=request.getAttribute("types")%>'
                   + '<a href="/new-type">New</a>'
@@ -105,8 +110,9 @@
         }
         
         function setType(type) {
-            var dropdown = type.parentElement.parentElement.getElementsByClassName("dropbtn");
-            dropdown[0].textContent = type.textContent;
+            var cell = type.parentElement.parentElement;
+            cell.getElementsByClassName("dropbtn")[0].textContent = type.textContent;
+            cell.getElementsByClassName("type")[0].value = type.textContent;
         }
     </script>
     </body>

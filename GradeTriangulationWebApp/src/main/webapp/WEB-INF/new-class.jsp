@@ -2,6 +2,7 @@
     Document   : new-class
     Created on : May 14, 2024, 12:28:44 p.m.
     Author     : alexp
+    TODO: make params not delete on incorrect entry
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

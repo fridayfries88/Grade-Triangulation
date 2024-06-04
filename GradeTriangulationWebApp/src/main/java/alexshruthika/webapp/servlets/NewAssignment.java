@@ -5,6 +5,7 @@
 package alexshruthika.webapp.servlets;
 
 import java.io.*;
+import java.util.*;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
@@ -35,10 +36,45 @@ public class NewAssignment extends PrivateServlet {
         checks: {
             String type = request.getParameter("type");
             String name = request.getParameter("name");
+            String[] criteria = new String[0];
+            String[] criteriaTypes = new String[0];
+            if (name == null || name.isEmpty()) {
+                focus = "name";
+                break checks;
+            }
+            
+            message = checkCriteria(request, criteria, criteriaTypes);
+            if (message != null) {
+                focus = "criterium0";
+                break checks;
+            }
+            System.err.println(Arrays.toString(criteria) + " " + Arrays.toString(criteriaTypes));
         }
+        request.setAttribute("courseCode", request.getSession().getAttribute("courseCode"));
+        request.setAttribute("focus", focus);
+        request.setAttribute("message", message);
         request.setAttribute("types", getTypes());
         request.getRequestDispatcher("/WEB-INF/new-assignment.jsp").include(request, response);
 
+    }
+    
+    private String checkCriteria(HttpServletRequest request, String[] criteria, String[] criteriaTypes) {
+        ArrayList<String> names = new ArrayList();
+        ArrayList<String> types = new ArrayList();
+        names.add(request.getParameter("criterium0"));
+        types.add(request.getParameter("type0"));
+        int i;
+        for (i = 1; names.getLast() != null && types.getLast() != null; i++) {
+            
+            
+            names.add(request.getParameter("criterium" + i));
+            types.add(request.getParameter("type" + i));
+        }
+        if (i == 1)
+            return "No Criteria. Make sure rows are filled in order.";
+        names.toArray(criteria);
+        types.toArray(criteriaTypes);
+        return null;
     }
     
     private void createAssignment() {

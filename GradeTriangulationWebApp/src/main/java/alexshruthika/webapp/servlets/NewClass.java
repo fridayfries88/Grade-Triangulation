@@ -77,7 +77,6 @@ public class NewClass extends PrivateServlet {
                 response.sendRedirect("/assignments?classID=" + classID);
             return;
         }
-        System.err.println(focus);
         request.setAttribute("message", message);
         request.setAttribute("focused", focus);
         request.getRequestDispatcher("/WEB-INF/new-class.jsp").include(request, response);
@@ -107,6 +106,7 @@ public class NewClass extends PrivateServlet {
             if (!studentNames[i].contains(" "))
                 return "All Students must have first and last name.";
             isEmpty = false;
+            
         }
         if (isEmpty)
             return "No students found.";
