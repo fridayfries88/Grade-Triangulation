@@ -6,6 +6,7 @@ package alexshruthika.webapp.servlets;
  */
 
 import java.io.*;
+import java.util.Arrays;
 import java.sql.*;
 
 import jakarta.servlet.ServletException;
@@ -39,7 +40,7 @@ public class NewClass extends PrivateServlet {
         checks: {
             String courseCode;
             int year, semester, period, classID;
-            String[] studentNames = new String[0];
+            String[] studentNames;
             
             courseCode = request.getParameter("courseCode");
             if (courseCode == null || courseCode.isEmpty()) {
@@ -64,11 +65,13 @@ public class NewClass extends PrivateServlet {
             }
             period = Integer.parseInt(request.getParameter("period"));
             
-            message = checkStudents(request.getParameter("students"), studentNames);
-            if (message != null) {
+            studentNames = checkStudents(request.getParameter("students"));
+            if (studentNames[0].equals("////Error////")) {
                 focus = "students";
+                message = studentNames[1];
                 break checks;
             }
+            System.err.println(Arrays.toString(studentNames));
             
             classID = createClass(courseCode, year, semester, period, studentNames, request.getSession());
             if (classID == -1)
@@ -96,21 +99,21 @@ public class NewClass extends PrivateServlet {
     // checks if students parameter is valid
     // fills string array with names of students
     // returns error message or null if no error
-    private String checkStudents(String students, String[] studentNames) {
+    private String[] checkStudents(String students) {
         boolean isEmpty = true;
-        studentNames = students.split("\n");
+        String[] studentNames = students.split("\n");
         for (int i  = 0; i < studentNames.length; i++) {
             studentNames[i] = studentNames[i].strip();
             if (studentNames[i].isEmpty())
                 continue;
             if (!studentNames[i].contains(" "))
-                return "All Students must have first and last name.";
+                return new String[]{"////Error////", "All Students must have first and last name."};
             isEmpty = false;
             
         }
         if (isEmpty)
-            return "No students found.";
-        return null;
+            return new String[]{"////Error////", "No students found."};
+        return studentNames;
     }
     
     private int createClass(String courseCode, int year, int semester, int period, String[] studentNames, HttpSession session) {
@@ -132,7 +135,7 @@ public class NewClass extends PrivateServlet {
             st = con.prepareStatement("select max(id) from classes");
             ResultSet result = st.executeQuery();
             result.next();
-            id = result.getInt("id");
+            id = result.getInt(1);
 
             // add all students to table
             st = con.prepareStatement(

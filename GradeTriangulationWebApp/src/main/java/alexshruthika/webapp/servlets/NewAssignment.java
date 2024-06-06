@@ -49,7 +49,7 @@ public class NewAssignment extends PrivateServlet {
                 message = criteria[0][0];
                 break checks;
             }
-            createAssignment(type, name, criteria, request.getSession());
+            response.sendRedirect("/assignment?assignmentID=" + createAssignment(type, name, criteria, request.getSession()));
         }
         request.setAttribute("courseCode", request.getSession().getAttribute("courseCode"));
         request.setAttribute("focus", focus);
@@ -58,7 +58,11 @@ public class NewAssignment extends PrivateServlet {
         request.getRequestDispatcher("/WEB-INF/new-assignment.jsp").include(request, response);
 
     }
-    
+    /**
+     * 
+     * @param request
+     * @return 2 elemenet array: 0 = names, 1 = types
+     */
     private String[][] checkCriteria(HttpServletRequest request) {
         String[][] out;
         ArrayList<String> names = new ArrayList();
@@ -78,10 +82,11 @@ public class NewAssignment extends PrivateServlet {
         return out;
     }
     
-    private void createAssignment(String type, String name, String[][] criteria, HttpSession session) {
+    private int createAssignment(String type, String name, String[][] criteria, HttpSession session) {
         try (Connection con = DatabaseConnection.init()) {
             int id;
             String tableStatement;
+            String[] columnNames = new String[15];
             
             // add assignment to assignments table
             PreparedStatement st = con.prepareStatement(
@@ -100,24 +105,56 @@ public class NewAssignment extends PrivateServlet {
             
             tableStatement = 
             "create table assignment" + id + "(\n" +
-                "`student_id` int unsigned not null,\n";
-            for (int i = 0; i < criteria[0].length - 1; i++) {
-                tableStatement += "`" + criteria[0][i] + "_" + criteria[1][i] + "` varchar(100),\n";
+                "`assignment" + id + "_student_id` int unsigned not null,\n";
+            int i;
+            for (i = 0; i < criteria[0].length - 1; i++) {
+                columnNames[i] = "`" + criteria[0][i] + "_" + criteria[1][i] + "`";
+                tableStatement += columnNames[i] + " varchar(100),\n";
+            }
+            // fill rest of rows with text fields
+            for (; i < 15; i++) {
+                columnNames[i] = "`extra " + (i+1) + "_Text`";
+                tableStatement += columnNames[i] + " varchar(100),\n";
             }
             tableStatement+=
-                "index student_id(student_id ASC),\n" +
-                "constraint student_id foreign key(student_id) references students(id) on delete restrict on update cascade);";
+                "index assignment" + id + "_student_id(assignment" + id + "_student_id ASC),\n" +
+                "constraint assignment" + id + "_student_id foreign key(assignment" + id + "_student_id) references students(id) on delete restrict on update cascade);";
             st = con.prepareStatement(tableStatement);
             st.executeUpdate();
+            createStudents((Integer)session.getAttribute("classID"), id);
+            return id;
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Error: " + e);
+        }
+        
+        return -1;
+    }
+    
+    private void createStudents(int classID, int assignmentID) throws SQLException, ClassNotFoundException {
+        ArrayList<Integer> studentIDs = new ArrayList();
+        Connection con = DatabaseConnection.init();
+        // get all students
+        PreparedStatement st = con.prepareStatement(
+        "select id from students where student_class_id=?");
+        st.setInt(1, classID);
+        ResultSet result = st.executeQuery();
+        while (result.next()) {
+            studentIDs.add(result.getInt(1));
+        }
+        
+        // add each student too assignment
+        for (Integer studentID : studentIDs) {
+            st = con.prepareStatement("insert into assignment" + assignmentID
+               + " (assignment" + assignmentID + "_student_id) values (?);");
+            st.setInt(1, studentID);
+            st.executeUpdate();
         }
     }
     
     private String getTypes() {
         // eventually, this will access sql
         return "<a onclick=\"setType(this)\">Yes/No</a>" +
-               "<a onclick=\"setType(this)\">GradeLevels</a>" +
+               "<a onclick=\"setType(this)\">Percentage</a>" +
                "<a onclick=\"setType(this)\">Text</a>";
     }
 

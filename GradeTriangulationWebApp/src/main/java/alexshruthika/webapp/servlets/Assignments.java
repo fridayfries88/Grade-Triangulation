@@ -83,8 +83,8 @@ public class Assignments extends PrivateServlet {
     }
 
     private String makeAssignment(ResultSet result) throws SQLException {
-        return "<button onclick='window.location = /assignment-students?assignmentID=" +
-             result.getInt("id") + "'>" + result.getString("name") + "</button>";
+        return "<button onclick='window.location = \"/assignment?assignmentID=" +
+             result.getInt("id") + "\"'>" + result.getString("name") + "</button><br>\n";
     }
 
     /**
