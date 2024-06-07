@@ -72,13 +72,16 @@ public class Assignment extends PrivateServlet {
             HashMap<String, String[]> types = getTypes();
             String[] criteriaTypes;
             String[] values;
+            String[] columnNames;
             // retrieve assignment data from database
             PreparedStatement st = DatabaseConnection.init().prepareStatement(
             "select * from assignment" + assignmentID);
             ResultSet result = st.executeQuery();
             criteriaTypes = getCriteriaTypes(result.getMetaData());
+            // get names of each column
+            columnNames = getColumnNames(result.getMetaData());
             // make header for rows
-            out[0] = makeHeader(result.getMetaData());
+            out[0] = makeHeader(columnNames);
             // make each row
             while (result.next()) {
                 // put values in array
@@ -96,14 +99,21 @@ public class Assignment extends PrivateServlet {
         return null;
     }
     
-    private String makeHeader(ResultSetMetaData metaData) throws SQLException, ClassNotFoundException {
-        String out = "";
-        String columnName;
+    private String[] getColumnNames(ResultSetMetaData metaData) throws SQLException, ClassNotFoundException {
+        String[] columnNames = new String[metaData.getColumnCount() - 1];
         for (int i = 2; i <= metaData.getColumnCount(); i++) {
-            columnName = metaData.getColumnName(i);
-            columnName = columnName.substring(0, columnName.lastIndexOf('_'));
+            columnNames[i-2] = metaData.getColumnName(i);
+            columnNames[i-2] = columnNames[i-2].substring(0, columnNames[i-2].lastIndexOf('_'));
+        }
+        return columnNames;
+    }
+    
+    private String makeHeader(String[] columnNames) {
+        String out = "";
+        for (int i = 0; i < columnNames.length; i++) {
             // make string for header cell
-            out += "<th>" + columnName + "</th>\n";
+            out += "<th>" + columnNames[i] + "<input name=\"header"
+                + i + "\" type=\"hidden\" value=\"" + columnNames[i] + "\"></th>";
         }
         return out;
     }
@@ -117,24 +127,30 @@ public class Assignment extends PrivateServlet {
     */
     private String makeRow(String student, String[] values, HashMap<String, String[]> types, String[] criteriaTypes) {
         String out =  "<tr>\n" +
-                        "<td>" + student + "</td>\n";
+                        "<td style=\"max-width:100%;white-space:nowrap\">" + student + "</td>\n";
         for (int i = 0; i < criteriaTypes.length; i++) {
             // if no options, make text input instead of dropdown
             if (types.get(criteriaTypes[i])[0] == null) {
-                out += "<td><input name=\"value_" + student + "_" + i + "\" type=\"text\" class=\"value\"></td>\n";
+                out += "<td style=\"max-width:100%;white-space:nowrap\">"
+                    + "<input name=\"" + student + "_" + i + "\" type=\"text\""
+                    + " class=\"value\" style=\"resize:horizontal\"></td>\n";
                 continue;
             }
             // if type is percent, make number from 0-100
             if (types.get(criteriaTypes[i])[0].equals("////percentage////")) {
-                out += "<td><input name=\"value_" + student + "_" + i +
-                       "\" type=\"number\" type=\"range\" min=\"0\" max=\"100\" "
-                     + "step=\"0.5\" class=\"value\"></td>\n";
+                out += "<td style=\"max-width:100%;white-space:nowrap\">"
+                    + "<input name=\"" + student + "_" + i + "\" type=\"number\""
+                    + " type=\"range\" min=\"0\" max=\"100\" step=\"0.5\""
+                    + " class=\"value\"></td>\n";
                 continue;
             }
-            out += "<td><div class=\"dropdown\">\n" +
-                    "<button type=\"button\" class=\"dropbtn\">" + values[i] + "</button>\n" + 
-                    "<input name=\"value_" + student + "_" + i + "\" type=\"hidden\" class=\"value\">\n" +
-                    "<div class=\"dropdown-content\">\n";
+            out += "<td style=\"max-width:100%;white-space:nowrap\">"
+                + "<div class=\"dropdown\">\n"
+                    + "<button type=\"button\" class=\"dropbtn\""
+                    + " style=\"resize:horizontal\">" + values[i] + "</button>\n"
+                    + "<input name=\"" + student + "_" + i + "\" type=\"hidden\""
+                    + " class=\"value\">\n"
+                    + "<div class=\"dropdown-content\">\n";
             for (String j : types.get(criteriaTypes[i])) {
                 if (j == null) break;
                 out += "<a onclick=\"setValue(this)\">" + j + "</a>";

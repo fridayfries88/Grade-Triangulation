@@ -57,14 +57,14 @@
     <center>
         <h1><%=request.getAttribute("name")%></h1>
         <form action="/save-assignment" method="post">
-        <table>
+        <table style='border-collapse:collapse;table-layout:auto;width:100%'>
             <tr>
                 <th>Student</th>
                 <%=request.getAttribute("criteria")%>
             </tr>
             <%=request.getAttribute("rows")%>
         </table>
-        <button type="submit">Save</button>
+        <button type="submit" onclick="window.alert('Saving...')">Save</button>
         <button type="button" onclick="if (window.confirm('Make sure you have saved. Cancel to go back and save')) window.location = '/classes'">Back to classes</button>
         <button type="button" onclick="downloadTable()">Download this table</button>
         </form>

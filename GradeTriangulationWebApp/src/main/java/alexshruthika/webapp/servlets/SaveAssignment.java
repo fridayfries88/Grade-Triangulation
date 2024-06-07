@@ -47,12 +47,19 @@ public class SaveAssignment extends PrivateServlet {
             PreparedStatement st = DatabaseConnection.init().prepareStatement(
             "select id from students where student_class_id=?");
             st.setInt(1, classID);
-            ResultSet result = st.executeQuery();
-            while (result.next()) {
+            ResultSet studentIDs = st.executeQuery();
+            while (studentIDs.next()) {
                 // go through each column
                 for (int i = 0; i < 15; i++) {
-                    if ((currentValue = request.getParameter("value_" + result.getInt(1) + "_" + i)) != null) {
-                        // save it to database
+                    if ((currentValue = request.getParameter("value_" + studentIDs.getInt(1) + "_" + i)) != null) {
+                        // split value into 
+                        st = DatabaseConnection.init().prepareStatement(
+                        "update assignment" + assignmentID + " set "
+                        + request.getParameter("header" + i) + " = ? where assignment"
+                        + assignmentID + "_studentID=?");
+                        st.setString(1, currentValue);
+                        st.setInt(2, studentIDs.getInt(1));
+                        st.executeUpdate();
                     }
                 }
             }
