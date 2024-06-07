@@ -16,28 +16,156 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `assignment6`
+-- Table structure for table `assignment10`
 --
 
-DROP TABLE IF EXISTS `assignment6`;
+DROP TABLE IF EXISTS `assignment10`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `assignment6` (
-  `student_id` int unsigned NOT NULL,
-  `Broke a beaker_Yes/No` varchar(100) DEFAULT NULL,
-  `Spilled chemicals_Yes/No` varchar(100) DEFAULT NULL,
-  KEY `student_id` (`student_id`),
-  CONSTRAINT `student_id` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+CREATE TABLE `assignment10` (
+  `assignment_student_id` int unsigned NOT NULL,
+  `jhfd_Yes/No` varchar(100) DEFAULT NULL,
+  `hidigv_////percentage////` varchar(100) DEFAULT NULL,
+  `dsiugfaiu_Text` varchar(100) DEFAULT NULL,
+  `misc3_Text` varchar(100) DEFAULT NULL,
+  `misc4_Text` varchar(100) DEFAULT NULL,
+  `misc5_Text` varchar(100) DEFAULT NULL,
+  `misc6_Text` varchar(100) DEFAULT NULL,
+  `misc7_Text` varchar(100) DEFAULT NULL,
+  `misc8_Text` varchar(100) DEFAULT NULL,
+  `misc9_Text` varchar(100) DEFAULT NULL,
+  `misc10_Text` varchar(100) DEFAULT NULL,
+  `misc11_Text` varchar(100) DEFAULT NULL,
+  `misc12_Text` varchar(100) DEFAULT NULL,
+  `misc13_Text` varchar(100) DEFAULT NULL,
+  `misc14_Text` varchar(100) DEFAULT NULL,
+  KEY `assignment_student_id` (`assignment_student_id`),
+  CONSTRAINT `assignment_student_id` FOREIGN KEY (`assignment_student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `assignment6`
+-- Dumping data for table `assignment10`
 --
 
-LOCK TABLES `assignment6` WRITE;
-/*!40000 ALTER TABLE `assignment6` DISABLE KEYS */;
-/*!40000 ALTER TABLE `assignment6` ENABLE KEYS */;
+LOCK TABLES `assignment10` WRITE;
+/*!40000 ALTER TABLE `assignment10` DISABLE KEYS */;
+/*!40000 ALTER TABLE `assignment10` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `assignment14`
+--
+
+DROP TABLE IF EXISTS `assignment14`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignment14` (
+  `assignment14_student_id` int unsigned NOT NULL,
+  `eghj_Text` varchar(100) DEFAULT NULL,
+  `misc1_Text` varchar(100) DEFAULT NULL,
+  `misc2_Text` varchar(100) DEFAULT NULL,
+  `misc3_Text` varchar(100) DEFAULT NULL,
+  `misc4_Text` varchar(100) DEFAULT NULL,
+  `misc5_Text` varchar(100) DEFAULT NULL,
+  `misc6_Text` varchar(100) DEFAULT NULL,
+  `misc7_Text` varchar(100) DEFAULT NULL,
+  `misc8_Text` varchar(100) DEFAULT NULL,
+  `misc9_Text` varchar(100) DEFAULT NULL,
+  `misc10_Text` varchar(100) DEFAULT NULL,
+  `misc11_Text` varchar(100) DEFAULT NULL,
+  `misc12_Text` varchar(100) DEFAULT NULL,
+  `misc13_Text` varchar(100) DEFAULT NULL,
+  `misc14_Text` varchar(100) DEFAULT NULL,
+  KEY `assignment14_student_id` (`assignment14_student_id`),
+  CONSTRAINT `assignment14_student_id` FOREIGN KEY (`assignment14_student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assignment14`
+--
+
+LOCK TABLES `assignment14` WRITE;
+/*!40000 ALTER TABLE `assignment14` DISABLE KEYS */;
+/*!40000 ALTER TABLE `assignment14` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `assignment15`
+--
+
+DROP TABLE IF EXISTS `assignment15`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignment15` (
+  `assignment15_student_id` int unsigned NOT NULL,
+  `text_Text` varchar(100) DEFAULT NULL,
+  `yes/no_Yes/No` varchar(100) DEFAULT NULL,
+  `percent_////percentage////` varchar(100) DEFAULT NULL,
+  `extra3_Text` varchar(100) DEFAULT NULL,
+  `extra4_Text` varchar(100) DEFAULT NULL,
+  `extra5_Text` varchar(100) DEFAULT NULL,
+  `extra6_Text` varchar(100) DEFAULT NULL,
+  `extra7_Text` varchar(100) DEFAULT NULL,
+  `extra8_Text` varchar(100) DEFAULT NULL,
+  `extra9_Text` varchar(100) DEFAULT NULL,
+  `extra10_Text` varchar(100) DEFAULT NULL,
+  `extra11_Text` varchar(100) DEFAULT NULL,
+  `extra12_Text` varchar(100) DEFAULT NULL,
+  `extra13_Text` varchar(100) DEFAULT NULL,
+  `extra14_Text` varchar(100) DEFAULT NULL,
+  KEY `assignment15_student_id` (`assignment15_student_id`),
+  CONSTRAINT `assignment15_student_id` FOREIGN KEY (`assignment15_student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assignment15`
+--
+
+LOCK TABLES `assignment15` WRITE;
+/*!40000 ALTER TABLE `assignment15` DISABLE KEYS */;
+/*!40000 ALTER TABLE `assignment15` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `assignment16`
+--
+
+DROP TABLE IF EXISTS `assignment16`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignment16` (
+  `assignment16_student_id` int unsigned NOT NULL,
+  `text_Text` varchar(100) DEFAULT NULL,
+  `bool_Yes/No` varchar(100) DEFAULT NULL,
+  `num_Percentage` varchar(100) DEFAULT NULL,
+  `extra3_Text` varchar(100) DEFAULT NULL,
+  `extra4_Text` varchar(100) DEFAULT NULL,
+  `extra5_Text` varchar(100) DEFAULT NULL,
+  `extra6_Text` varchar(100) DEFAULT NULL,
+  `extra7_Text` varchar(100) DEFAULT NULL,
+  `extra8_Text` varchar(100) DEFAULT NULL,
+  `extra9_Text` varchar(100) DEFAULT NULL,
+  `extra10_Text` varchar(100) DEFAULT NULL,
+  `extra11_Text` varchar(100) DEFAULT NULL,
+  `extra12_Text` varchar(100) DEFAULT NULL,
+  `extra13_Text` varchar(100) DEFAULT NULL,
+  `extra14_Text` varchar(100) DEFAULT NULL,
+  KEY `assignment16_student_id` (`assignment16_student_id`),
+  CONSTRAINT `assignment16_student_id` FOREIGN KEY (`assignment16_student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assignment16`
+--
+
+LOCK TABLES `assignment16` WRITE;
+/*!40000 ALTER TABLE `assignment16` DISABLE KEYS */;
+INSERT INTO `assignment16` VALUES (4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `assignment16` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -56,7 +184,7 @@ CREATE TABLE `assignments` (
   PRIMARY KEY (`id`),
   KEY `class_id` (`assignment_class_id`),
   CONSTRAINT `class_id` FOREIGN KEY (`assignment_class_id`) REFERENCES `classes` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +193,7 @@ CREATE TABLE `assignments` (
 
 LOCK TABLES `assignments` WRITE;
 /*!40000 ALTER TABLE `assignments` DISABLE KEYS */;
-INSERT INTO `assignments` VALUES (1,3,'a','a',NULL),(3,3,'Project','Calculator',NULL),(4,3,'Lab','Acid Lab',NULL),(5,3,'Test','For loop test',NULL),(6,1,'Lab','Equilibrium Lab',NULL);
+INSERT INTO `assignments` VALUES (8,6,'sfgh','artyu',NULL),(9,6,'ouoig','fyg',NULL),(10,6,'yudwgf','uysadtf',NULL),(11,6,'jhg','tytkl',NULL),(12,6,'dtfhgj','ftgfg',NULL),(13,6,'asdfgjk','sdfghjkl',NULL),(14,6,'dfghj','dfghjk',NULL),(15,6,'a','abcd',NULL),(16,6,'dKNFH','FDAJSH',NULL);
 /*!40000 ALTER TABLE `assignments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +214,7 @@ CREATE TABLE `classes` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +223,7 @@ CREATE TABLE `classes` (
 
 LOCK TABLES `classes` WRITE;
 /*!40000 ALTER TABLE `classes` DISABLE KEYS */;
-INSERT INTO `classes` VALUES (1,1,'SCH4U.03',2024,2,1),(3,1,'ICS4U.05',2024,2,4);
+INSERT INTO `classes` VALUES (1,1,'SCH4U.03',2024,2,1),(3,1,'ICS4U.05',2024,2,4),(6,1,'asdfghjk',2024,1,1);
 /*!40000 ALTER TABLE `classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +242,7 @@ CREATE TABLE `students` (
   PRIMARY KEY (`id`),
   KEY `student_class_id` (`student_class_id`),
   CONSTRAINT `student_class_id` FOREIGN KEY (`student_class_id`) REFERENCES `classes` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,6 +251,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
+INSERT INTO `students` VALUES (4,6,'asdfg','dfghjk'),(5,6,'sd','ghjk'),(6,6,'sdfg','ohd');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +286,7 @@ CREATE TABLE `types` (
 
 LOCK TABLES `types` WRITE;
 /*!40000 ALTER TABLE `types` DISABLE KEYS */;
-INSERT INTO `types` VALUES ('Yes/No','yes','no',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `types` VALUES ('Yes/No','yes','no',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Text',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Percentage','////percentage////',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,4 +324,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-04 12:48:46
+-- Dump completed on 2024-06-06 20:07:12
