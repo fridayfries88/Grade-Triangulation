@@ -12,7 +12,9 @@
         <title><%=request.getAttribute("courseCode")%> - Assignments</title>
     </head>
     <body>
+    <center>
         <h1><%=request.getAttribute("classInfo")%></h1>
         <%=request.getAttribute("assignments")%>
+    </center>
     </body>
 </html>

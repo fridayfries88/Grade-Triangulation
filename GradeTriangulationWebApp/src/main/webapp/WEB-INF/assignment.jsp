@@ -64,7 +64,7 @@
             </tr>
             <%=request.getAttribute("rows")%>
         </table>
-        <button type="submit" onclick="window.alert('Saving...')">Save</button>
+        <button type="submit">Save</button>
         <button type="button" onclick="if (window.confirm('Make sure you have saved. Cancel to go back and save')) window.location = '/classes'">Back to classes</button>
         <button type="button" onclick="downloadTable()">Download this table</button>
         </form>

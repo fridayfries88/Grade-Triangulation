@@ -49,23 +49,30 @@ public class SaveAssignment extends PrivateServlet {
             st.setInt(1, classID);
             ResultSet studentIDs = st.executeQuery();
             while (studentIDs.next()) {
+//                System.err.println("Student: " + studentIDs.getInt(1));
                 // go through each column
                 for (int i = 0; i < 15; i++) {
-                    if ((currentValue = request.getParameter("value_" + studentIDs.getInt(1) + "_" + i)) != null) {
+//                    System.err.println("Column: " + request.getParameter("header" + i));
+                    if ((currentValue = request.getParameter(studentIDs.getInt(1) + "_" + i)) != null) {
+//                        System.err.println("Putting " + currentValue);
                         // split value into 
                         st = DatabaseConnection.init().prepareStatement(
-                        "update assignment" + assignmentID + " set "
-                        + request.getParameter("header" + i) + " = ? where assignment"
-                        + assignmentID + "_studentID=?");
+                        "update assignment" + assignmentID + " set `"
+                        + request.getParameter("header" + i) + "` = ? where assignment"
+                        + assignmentID + "_student_id=?");
                         st.setString(1, currentValue);
                         st.setInt(2, studentIDs.getInt(1));
                         st.executeUpdate();
-                    }
+                    } 
+//                    else {
+//                        System.err.println("null");
+//                    }
                 }
             }
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Error: " + e);
         }
+        response.sendRedirect("/assignment");
     }
 
     /**
