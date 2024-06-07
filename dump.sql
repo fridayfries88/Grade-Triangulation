@@ -16,6 +16,45 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `assignment1`
+--
+
+DROP TABLE IF EXISTS `assignment1`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignment1` (
+  `assignment1_student_id` int unsigned NOT NULL,
+  `TextBox_Text` varchar(100) DEFAULT NULL,
+  `Percent_Percentage` varchar(100) DEFAULT NULL,
+  `Yes or No_Yes/No` varchar(100) DEFAULT NULL,
+  `extra 4_Text` varchar(100) DEFAULT NULL,
+  `extra 5_Text` varchar(100) DEFAULT NULL,
+  `extra 6_Text` varchar(100) DEFAULT NULL,
+  `extra 7_Text` varchar(100) DEFAULT NULL,
+  `extra 8_Text` varchar(100) DEFAULT NULL,
+  `extra 9_Text` varchar(100) DEFAULT NULL,
+  `extra 10_Text` varchar(100) DEFAULT NULL,
+  `extra 11_Text` varchar(100) DEFAULT NULL,
+  `extra 12_Text` varchar(100) DEFAULT NULL,
+  `extra 13_Text` varchar(100) DEFAULT NULL,
+  `extra 14_Text` varchar(100) DEFAULT NULL,
+  `extra 15_Text` varchar(100) DEFAULT NULL,
+  KEY `assignment1_student_id` (`assignment1_student_id`),
+  CONSTRAINT `assignment1_student_id` FOREIGN KEY (`assignment1_student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assignment1`
+--
+
+LOCK TABLES `assignment1` WRITE;
+/*!40000 ALTER TABLE `assignment1` DISABLE KEYS */;
+INSERT INTO `assignment1` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `assignment1` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `assignment10`
 --
 
@@ -169,6 +208,45 @@ INSERT INTO `assignment16` VALUES (4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NUL
 UNLOCK TABLES;
 
 --
+-- Table structure for table `assignment17`
+--
+
+DROP TABLE IF EXISTS `assignment17`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignment17` (
+  `assignment17_student_id` int unsigned NOT NULL,
+  `TextBox_Text` varchar(100) DEFAULT NULL,
+  `Percent_Percentage` varchar(100) DEFAULT NULL,
+  `Yes or No_Yes/No` varchar(100) DEFAULT NULL,
+  `extra 4_Text` varchar(100) DEFAULT NULL,
+  `extra 5_Text` varchar(100) DEFAULT NULL,
+  `extra 6_Text` varchar(100) DEFAULT NULL,
+  `extra 7_Text` varchar(100) DEFAULT NULL,
+  `extra 8_Text` varchar(100) DEFAULT NULL,
+  `extra 9_Text` varchar(100) DEFAULT NULL,
+  `extra 10_Text` varchar(100) DEFAULT NULL,
+  `extra 11_Text` varchar(100) DEFAULT NULL,
+  `extra 12_Text` varchar(100) DEFAULT NULL,
+  `extra 13_Text` varchar(100) DEFAULT NULL,
+  `extra 14_Text` varchar(100) DEFAULT NULL,
+  `extra 15_Text` varchar(100) DEFAULT NULL,
+  KEY `assignment17_student_id` (`assignment17_student_id`),
+  CONSTRAINT `assignment17_student_id` FOREIGN KEY (`assignment17_student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assignment17`
+--
+
+LOCK TABLES `assignment17` WRITE;
+/*!40000 ALTER TABLE `assignment17` DISABLE KEYS */;
+INSERT INTO `assignment17` VALUES (7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(9,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `assignment17` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `assignments`
 --
 
@@ -184,7 +262,7 @@ CREATE TABLE `assignments` (
   PRIMARY KEY (`id`),
   KEY `class_id` (`assignment_class_id`),
   CONSTRAINT `class_id` FOREIGN KEY (`assignment_class_id`) REFERENCES `classes` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,7 +271,7 @@ CREATE TABLE `assignments` (
 
 LOCK TABLES `assignments` WRITE;
 /*!40000 ALTER TABLE `assignments` DISABLE KEYS */;
-INSERT INTO `assignments` VALUES (8,6,'sfgh','artyu',NULL),(9,6,'ouoig','fyg',NULL),(10,6,'yudwgf','uysadtf',NULL),(11,6,'jhg','tytkl',NULL),(12,6,'dtfhgj','ftgfg',NULL),(13,6,'asdfgjk','sdfghjkl',NULL),(14,6,'dfghj','dfghjk',NULL),(15,6,'a','abcd',NULL),(16,6,'dKNFH','FDAJSH',NULL);
+INSERT INTO `assignments` VALUES (8,6,'sfgh','artyu',NULL),(9,6,'ouoig','fyg',NULL),(10,6,'yudwgf','uysadtf',NULL),(11,6,'jhg','tytkl',NULL),(12,6,'dtfhgj','ftgfg',NULL),(13,6,'asdfgjk','sdfghjkl',NULL),(14,6,'dfghj','dfghjk',NULL),(15,6,'a','abcd',NULL),(16,6,'dKNFH','FDAJSH',NULL),(17,7,'Test','TestAssignment',NULL);
 /*!40000 ALTER TABLE `assignments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +292,7 @@ CREATE TABLE `classes` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -223,7 +301,7 @@ CREATE TABLE `classes` (
 
 LOCK TABLES `classes` WRITE;
 /*!40000 ALTER TABLE `classes` DISABLE KEYS */;
-INSERT INTO `classes` VALUES (1,1,'SCH4U.03',2024,2,1),(3,1,'ICS4U.05',2024,2,4),(6,1,'asdfghjk',2024,1,1);
+INSERT INTO `classes` VALUES (1,1,'SCH4U.03',2024,2,1),(3,1,'ICS4U.05',2024,2,4),(6,1,'asdfghjk',2024,1,1),(7,5,'TestClass',2024,2,4);
 /*!40000 ALTER TABLE `classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +320,7 @@ CREATE TABLE `students` (
   PRIMARY KEY (`id`),
   KEY `student_class_id` (`student_class_id`),
   CONSTRAINT `student_class_id` FOREIGN KEY (`student_class_id`) REFERENCES `classes` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +329,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (4,6,'asdfg','dfghjk'),(5,6,'sd','ghjk'),(6,6,'sdfg','ohd');
+INSERT INTO `students` VALUES (4,6,'asdfg','dfghjk'),(5,6,'sd','ghjk'),(6,6,'sdfg','ohd'),(7,7,'First','Last'),(8,7,'First2','Last2'),(9,7,'First3','Last3');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -302,7 +380,7 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -311,7 +389,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'apych1','1234');
+INSERT INTO `users` VALUES (1,'apych1','1234'),(5,'TestAccount','password');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -324,4 +402,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-06 20:07:12
+-- Dump completed on 2024-06-07  9:02:24
