@@ -71,7 +71,6 @@ public class NewClass extends PrivateServlet {
                 message = studentNames[1];
                 break checks;
             }
-            System.err.println(Arrays.toString(studentNames));
             
             classID = createClass(courseCode, year, semester, period, studentNames, request.getSession());
             if (classID == -1)

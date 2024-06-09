@@ -59,7 +59,7 @@ public class Student extends PrivateServlet {
         }
         request.setAttribute("rows", makeRows(studentID, (Integer)request.getSession().getAttribute("classID")));
         
-        request.getRequestDispatcher("/WEB-INF/assignment.jsp").include(request, response);
+        request.getRequestDispatcher("/WEB-INF/student.jsp").include(request, response);
     }
     
     private String makeRows(int studentID, int classID) {
@@ -69,14 +69,14 @@ public class Student extends PrivateServlet {
             
             // go through all assignments of class
             PreparedStatement st = con.prepareStatement(
-            "select * from assignments where assignment_class_id=?");
+            "select * from assignments where `assignment_class_id`=?");
             st.setInt(1, classID); // class id is wrong
             ResultSet assignments = st.executeQuery();
             ResultSet row;
             while (assignments.next()) {
                 st = con.prepareStatement(
-                "select * from assignment" + assignments.getInt("id")+ "where "
-                + "assignment" + assignments.getInt("id") + "_student_id=?");
+                "select * from assignment" + assignments.getInt("id")+ " where `"
+                + "assignment" + assignments.getInt("id") + "_student_id`=?");
                 st.setInt(1, studentID);
                 row = st.executeQuery();
                 row.next();
@@ -93,8 +93,8 @@ public class Student extends PrivateServlet {
         String out = "<tr><td></td>\n"; // maybe add date/type in this box
         // get criteria names and types
         String[] columnNames = new String[row.getMetaData().getColumnCount() - 1];
-        String[] criteria = columnNames;
-        String[] criteriaTypes = columnNames;
+        String[] criteria = new String[columnNames.length];
+        String[] criteriaTypes = new String[columnNames.length];
         int typeDivider;
         String value;
         
@@ -117,24 +117,24 @@ public class Student extends PrivateServlet {
             if (types.get(criteriaTypes[i])[0] == null) {
                 out += "<td style=\"max-width:100%;white-space:nowrap\">"
                     + "<input name=\"" + assignmentID + "_" + i + "\" type=\"text\""
-                    + " class=\"value\" style=\"resize:horizontal\" value=\""
-                    + (value != null ? value : "") + "\"></td>\n";
+                    + " class=\"value\" maxlength='500' value=\""
+                    + (value != null ? value : "") + "\" onkeydown=\"isSaved = false\"></td>\n";
                 continue;
             }
             // if type is percent, make number from 0-100
             if (types.get(criteriaTypes[i])[0].equals("////percentage////")) {
                 out += "<td style=\"max-width:100%;white-space:nowrap\">"
                     + "<input name=\"" + assignmentID + "_" + i + "\" type=\"number\""
-                    + " type=\"range\" min=\"0\" max=\"100\" step=\"0.5\""
+                    + " min=\"0\" max=\"100\" onkeydown=\"isSaved = false\""
                     + " class=\"value\" value=\"" + (value != null ? value : "") + "\"></td>\n";
                 continue;
             }
             out += "<td style=\"max-width:100%;white-space:nowrap\">"
                 + "<div class=\"dropdown\">\n"
                 + "<button type=\"button\" class=\"dropbtn\""
-                + " style=\"resize:horizontal\">" + (value != null ? value
+                + " style=\"resize:horizontal\">" + (value != null && !value.isEmpty() ? value
                 : "[Dropdown]") + "</button>\n<input name=\"" + assignmentID
-                + "_" + i + "\" type=\"hidden\" value=\"" + value
+                + "_" + i + "\" type=\"hidden\" value=\"" + (value != null ? value : "")
                 + "\" class=\"value\">\n<div class=\"dropdown-content\">\n";
             for (String j : types.get(criteriaTypes[i])) {
                 if (j == null) break;

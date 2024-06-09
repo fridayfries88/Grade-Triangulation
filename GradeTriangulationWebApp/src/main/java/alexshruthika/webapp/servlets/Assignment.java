@@ -67,14 +67,17 @@ public class Assignment extends PrivateServlet {
     }
     
     private String[] makeRows(int assignmentID) {
-        try {
+        try (Connection con = DatabaseConnection.init()) {
             String[] out = {"", ""};
             HashMap<String, String[]> types = getTypes();
             String[] criteriaTypes;
             String[] values;
             String[] columnNames;
+            PreparedStatement studentStatement = con.prepareStatement(
+                "select first_name, last_name from students where id=?");
+            ResultSet studentNames;
             // retrieve assignment data from database
-            PreparedStatement st = DatabaseConnection.init().prepareStatement(
+            PreparedStatement st = con.prepareStatement(
             "select * from assignment" + assignmentID);
             ResultSet result = st.executeQuery();
             criteriaTypes = getCriteriaTypes(result.getMetaData());
@@ -89,8 +92,14 @@ public class Assignment extends PrivateServlet {
                 for (int i = 2; i <= result.getMetaData().getColumnCount(); i++) {
                     values[i-2] = result.getString(i);
                 }
+                // get student name
+                studentStatement.setInt(1, result.getInt(1));
+                studentNames = studentStatement.executeQuery();
+                studentNames.next();
                 // add row to output
-                out[1] += makeRow(result.getString(1), values, types, criteriaTypes);
+                out[1] += makeRow(studentNames.getString("first_name") + " "
+                                  + studentNames.getString("last_name")
+                                , result.getInt(1), values, types, criteriaTypes);
             }
             return out;
         } catch (SQLException | ClassNotFoundException e) {
@@ -118,37 +127,38 @@ public class Assignment extends PrivateServlet {
     }
     
     /**
-    * @param student: name of student lastname, firstname
+    * @param studentID: name of student lastname, firstname
     * @param values: already inputted criteria in order of columns
     * @param types: hashmap of all types, key=name of type, value=allowed strings
     * @param criteriaTypes: array of all criteria types in order of columns
     * @return String of html to make row of dropdowns for each criterium
     */
-    private String makeRow(String student, String[] values, HashMap<String, String[]> types, String[] criteriaTypes) {
+    private String makeRow(String studentName, int studentID, String[] values, HashMap<String, String[]> types, String[] criteriaTypes) {
         String out =  "<tr>\n" +
-                        "<td style=\"max-width:100%;white-space:nowrap\">" + student + "</td>\n";
+                        "<td style=\"max-width:100%;white-space:nowrap\">" + studentName + "</td>\n";
         for (int i = 0; i < criteriaTypes.length; i++) {
             // if no options, make text input instead of dropdown
             if (types.get(criteriaTypes[i])[0] == null) {
                 out += "<td style=\"max-width:100%;white-space:nowrap\">"
-                    + "<input name=\"" + student + "_" + i + "\" type=\"text\""
+                    + "<input name=\"" + studentID + "_" + i + "\" type=\"text\""
                     + " class=\"value\" style=\"resize:horizontal\" value=\""
-                    + (values[i] != null ? values[i] : "") + "\"></td>\n";
+                    + (values[i] != null ? values[i] : "") + "\""
+                    + "onkeydown=\"isSaved = false\"></td>\n";
                 continue;
             }
             // if type is percent, make number from 0-100
             if (types.get(criteriaTypes[i])[0].equals("////percentage////")) {
                 out += "<td style=\"max-width:100%;white-space:nowrap\">"
-                    + "<input name=\"" + student + "_" + i + "\" type=\"number\""
-                    + " type=\"range\" min=\"0\" max=\"100\" step=\"0.5\""
+                    + "<input name=\"" + studentID + "_" + i + "\" type=\"number\""
+                    + " min=\"0\" max=\"100\" onkeydown=\"isSaved = false\""
                     + " class=\"value\" value=\"" + (values[i] != null ? values[i] : "") + "\"></td>\n";
                 continue;
             }
             out += "<td style=\"max-width:100%;white-space:nowrap\">"
                 + "<div class=\"dropdown\">\n"
                     + "<button type=\"button\" class=\"dropbtn\""
-                    + " style=\"resize:horizontal\">" + (values[i] != null ? values[i] : "[Dropdown]") + "</button>\n"
-                    + "<input name=\"" + student + "_" + i + "\" type=\"hidden\""
+                    + " style=\"resize:horizontal\">" + (values[i] != null && !values[i].isEmpty() ? values[i] : "[Dropdown]") + "</button>\n"
+                    + "<input name=\"" + studentID + "_" + i + "\" type=\"hidden\""
                     + " value=\"" + (values[i] != null ? values[i] : "") + "\" class=\"value\">\n"
                     + "<div class=\"dropdown-content\">\n";
             for (String j : types.get(criteriaTypes[i])) {

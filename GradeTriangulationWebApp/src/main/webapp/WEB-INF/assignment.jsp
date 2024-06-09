@@ -57,7 +57,7 @@
     <center>
         <h1><%=request.getAttribute("name")%></h1>
         <form action="/save-assignment" method="post">
-        <table style='border-collapse:collapse;table-layout:auto;width:100%'>
+        <table style='border-collapse:collapse;table-layout:auto'>
             <tr>
                 <th>Student</th>
                 <%=request.getAttribute("criteria")%>
@@ -65,15 +65,23 @@
             <%=request.getAttribute("rows")%>
         </table>
         <button type="submit">Save</button>
-        <button type="button" onclick="if (window.confirm('Make sure you have saved. Cancel to go back and save')) window.location = '/classes'">Back to classes</button>
+        <button type="button" onclick="backToClasses()">Back to classes</button>
         <button type="button" onclick="downloadTable()">Download this table</button>
         </form>
     </center>
     <script>
+        var isSaved = true;
+        
         function setValue(val) {
             var cell = val.parentElement.parentElement;
             cell.getElementsByClassName("dropbtn")[0].textContent = val.textContent;
             cell.getElementsByClassName("value")[0].value = val.textContent;
+            isSaved = false;
+        }
+        
+        function backToClasses() {
+            if (isSaved || window.confirm('Are you sure you want to exit without saving?'))
+                window.location = '/classes';
         }
     </script>
     </body>

@@ -80,7 +80,6 @@
                 <input name="type0" type="hidden" class="type">
                 <div class="dropdown-content">
                   <%=request.getAttribute("types")%>
-                  <a href="/new-type">New</a>
                 </div>
             </div>
             </td>
@@ -104,7 +103,6 @@
                 + '<input name="type' + (criteria.rows.length - 2) + '" type="hidden" class="type">'
                 + '<div class="dropdown-content">\n'
                   + '<%=request.getAttribute("types")%>'
-                  + '<a href="/new-type">New</a>'
                 + '</div>'
               + '</div>';
         }

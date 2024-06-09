@@ -110,16 +110,14 @@ public class NewAssignment extends PrivateServlet {
             int i;
             for (i = 0; i < criteria[0].length; i++) {
                 columnNames[i] = "`" + criteria[0][i] + "_" + criteria[1][i] + "`";
-                tableStatement += columnNames[i] + " varchar(100),\n";
+                tableStatement += columnNames[i] + " varchar(500),\n";
             }
-            // fill rest of rows with text fields
-            for (; i < 15; i++) {
-                columnNames[i] = "`extra " + (i+1) + "_Text`";
-                tableStatement += columnNames[i] + " varchar(100),\n";
-            }
+            // add extra row at the end
+            columnNames[i] = "`Additional notes_Text`";
+            tableStatement += columnNames[i] + " varchar(500),\n";
             tableStatement+=
                 "index assignment" + id + "_student_id(assignment" + id + "_student_id ASC),\n" +
-                "constraint assignment" + id + "_student_id foreign key(assignment" + id + "_student_id) references students(id) on delete restrict on update cascade);";
+                "constraint assignment" + id + "_student_id foreign key(assignment" + id + "_student_id) references students(id) on delete cascade on update cascade);";
             st = con.prepareStatement(tableStatement);
             st.executeUpdate();
             createStudents((Integer)session.getAttribute("classID"), id);
@@ -153,10 +151,18 @@ public class NewAssignment extends PrivateServlet {
     }
     
     private String getTypes() {
-        // eventually, this will access sql
-        return "<a onclick=\"setType(this)\">Yes/No</a>" +
-               "<a onclick=\"setType(this)\">Percentage</a>" +
-               "<a onclick=\"setType(this)\">Text</a>";
+        String out = "";
+        try {
+            PreparedStatement st = DatabaseConnection.init().prepareStatement(
+            "select name from types");
+            ResultSet result = st.executeQuery();
+            while (result.next()) {
+                out += "<a onclick=\"setType(this)\">" + result.getString(1) + "</a>";
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            System.err.println("Error: " + e);
+        }
+        return out;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

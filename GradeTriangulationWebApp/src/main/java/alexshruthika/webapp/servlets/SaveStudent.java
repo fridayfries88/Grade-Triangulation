@@ -18,7 +18,7 @@ import alexshruthika.webapp.DatabaseConnection;
  *
  * @author alexp
  */
-public class SaveAssignment extends PrivateServlet {
+public class SaveStudent extends PrivateServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,32 +33,32 @@ public class SaveAssignment extends PrivateServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         // send back to assignments if no assignmentID
-        if (request.getSession().getAttribute("assignmentID") == null) {
-            response.sendRedirect("/assignments");
+        if (request.getSession().getAttribute("studentID") == null) {
+            response.sendRedirect("/students");
             return;
         }
         // get assignment and class id
-        int assignmentID = (int)request.getSession().getAttribute("assignmentID");
+        int studentID = (int)request.getSession().getAttribute("studentID");
         int classID = (int)request.getSession().getAttribute("classID");
         
         try {
             String currentValue;
-            // get all student ids
+            // get all assignment ids
             PreparedStatement st = DatabaseConnection.init().prepareStatement(
-            "select id from students where student_class_id=?");
+            "select id from assignments where assignment_class_id=?");
             st.setInt(1, classID);
-            ResultSet studentIDs = st.executeQuery();
-            while (studentIDs.next()) {
+            ResultSet assignmentIDs = st.executeQuery();
+            while (assignmentIDs.next()) {
                 // go through each column
                 for (int i = 0; i < 15; i++) {
-                    if ((currentValue = request.getParameter(studentIDs.getInt(1) + "_" + i)) != null) {
+                    if ((currentValue = request.getParameter(assignmentIDs.getInt(1) + "_" + i)) != null) {
                         // split value into 
                         st = DatabaseConnection.init().prepareStatement(
-                        "update assignment" + assignmentID + " set `"
+                        "update assignment" + assignmentIDs.getInt(1) + " set `"
                         + request.getParameter("header" + i) + "` = ? where assignment"
-                        + assignmentID + "_student_id=?");
+                        + assignmentIDs.getInt(1) + "_student_id=?");
                         st.setString(1, currentValue);
-                        st.setInt(2, studentIDs.getInt(1));
+                        st.setInt(2, studentID);
                         st.executeUpdate();
                     }
                 }
@@ -66,7 +66,7 @@ public class SaveAssignment extends PrivateServlet {
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Error: " + e);
         }
-        response.sendRedirect("/assignment");
+        response.sendRedirect("/student");
     }
 
     /**
@@ -76,7 +76,7 @@ public class SaveAssignment extends PrivateServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Saves changes made to student";
     }// </editor-fold>
 
 }
