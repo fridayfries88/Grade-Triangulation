@@ -90,12 +90,12 @@ public class Student extends PrivateServlet {
     }
     
     private String makeRow(String assignmentName, int assignmentID, ResultSet row, HashMap<String, String[]> types) throws SQLException {
-        String out = "<tr><td></td>\n"; // maybe add date/type in this box
+        String out = "<table style='border-collapse:collapse;table-layout:auto;width:100%'><tr><th></th>\n"; // maybe add date/type in this box
         // get criteria names and types
         String[] columnNames = new String[row.getMetaData().getColumnCount() - 1];
         String[] criteria = new String[columnNames.length];
         String[] criteriaTypes = new String[columnNames.length];
-        int typeDivider;
+        int typeDivider, valueLength;
         String value;
         
         for (int i = 0; i < columnNames.length; i++) {
@@ -104,37 +104,41 @@ public class Student extends PrivateServlet {
             criteria[i] = columnNames[i].substring(0, typeDivider);
             criteriaTypes[i] = columnNames[i].substring(typeDivider + 1);
             // make header row
-            out += "<td style=\"max-width:100%;white-space:nowrap\">"
-                + criteria[i] + "<input name=\"header" + i + "\" type=\"hidden\""
-                + " value=\"" + columnNames[i] + "\"></td>";
+            out += "<th style=\"max-width:100%;white-space:nowrap\">"
+                + criteria[i] + "<input name=\"header" + assignmentID + "_" + i
+                + "\" type=\"hidden\" value=\"" + columnNames[i] + "\"></th>";
         }
         // make value row
         out +=  "</tr>\n<tr>\n<td style=\"max-width:100%;white-space:nowrap\">"
             + assignmentName + "</td>\n";
         for (int i = 0; i < criteria.length; i++) {
             value = row.getString(i+2);
+            if (value == null) value = "";
             // if no options, make text input instead of dropdown
-            if (types.get(criteriaTypes[i])[0] == null) {
-                out += "<td style=\"max-width:100%;white-space:nowrap\">"
-                    + "<input name=\"" + assignmentID + "_" + i + "\" type=\"text\""
-                    + " class=\"value\" maxlength='500' value=\""
-                    + (value != null ? value : "") + "\" onkeydown=\"isSaved = false\"></td>\n";
+            if (types.get(criteriaTypes[i])[0] == null)
+            {
+                valueLength = value.length();
+                out += "<td style='max-width:100%;white-space:nowrap'>"
+                    + "<input name='" + assignmentID + "_" + i + "' type='text'"
+                    + " class='value' size='" + (valueLength < 10 ? 10 : valueLength)
+                    + "' maxlength='500' value='" + value
+                    + "' onkeyup='resizeInput(this)'</td>\n";
                 continue;
             }
             // if type is percent, make number from 0-100
             if (types.get(criteriaTypes[i])[0].equals("////percentage////")) {
-                out += "<td style=\"max-width:100%;white-space:nowrap\">"
+                out += "<td style=\"white-space:nowrap\">"
                     + "<input name=\"" + assignmentID + "_" + i + "\" type=\"number\""
-                    + " min=\"0\" max=\"100\" onkeydown=\"isSaved = false\""
-                    + " class=\"value\" value=\"" + (value != null ? value : "") + "\"></td>\n";
+                    + " min=\"0\" max=\"100\" class=\"value\" value=\""
+                    + value + "\" size='7'></td>\n";
                 continue;
             }
-            out += "<td style=\"max-width:100%;white-space:nowrap\">"
+            out += "<td style=\"white-space:nowrap\">"
                 + "<div class=\"dropdown\">\n"
                 + "<button type=\"button\" class=\"dropbtn\""
-                + " style=\"resize:horizontal\">" + (value != null && !value.isEmpty() ? value
+                + " style=\"resize:horizontal\">" + (!value.isEmpty() ? value
                 : "[Dropdown]") + "</button>\n<input name=\"" + assignmentID
-                + "_" + i + "\" type=\"hidden\" value=\"" + (value != null ? value : "")
+                + "_" + i + "\" type=\"hidden\" value=\"" + value
                 + "\" class=\"value\">\n<div class=\"dropdown-content\">\n";
             for (String j : types.get(criteriaTypes[i])) {
                 if (j == null) break;
@@ -142,7 +146,7 @@ public class Student extends PrivateServlet {
             }
             out += "</div>\n</div></td>\n";
         }
-        return out + "</tr>";
+        return out + "</tr></table>\n";
     }
     
     private HashMap<String, String[]> getTypes() throws SQLException, ClassNotFoundException {

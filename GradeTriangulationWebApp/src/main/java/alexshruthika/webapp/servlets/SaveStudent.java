@@ -43,20 +43,21 @@ public class SaveStudent extends PrivateServlet {
         
         try {
             String currentValue;
+            int assignmentID;
             // get all assignment ids
             PreparedStatement st = DatabaseConnection.init().prepareStatement(
             "select id from assignments where assignment_class_id=?");
             st.setInt(1, classID);
             ResultSet assignmentIDs = st.executeQuery();
             while (assignmentIDs.next()) {
+                assignmentID = assignmentIDs.getInt(1);
                 // go through each column
                 for (int i = 0; i < 15; i++) {
                     if ((currentValue = request.getParameter(assignmentIDs.getInt(1) + "_" + i)) != null) {
-                        // split value into 
                         st = DatabaseConnection.init().prepareStatement(
-                        "update assignment" + assignmentIDs.getInt(1) + " set `"
-                        + request.getParameter("header" + i) + "` = ? where assignment"
-                        + assignmentIDs.getInt(1) + "_student_id=?");
+                        "update assignment" + assignmentID + " set `"
+                        + request.getParameter("header" + assignmentID + "_" + i)
+                        + "` = ? where assignment" + assignmentID + "_student_id=?");
                         st.setString(1, currentValue);
                         st.setInt(2, studentID);
                         st.executeUpdate();

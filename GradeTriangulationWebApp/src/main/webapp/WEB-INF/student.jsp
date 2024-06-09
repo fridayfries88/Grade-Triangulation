@@ -14,12 +14,8 @@
     <body>
     <center>
         <h1><%=request.getAttribute("name")%></h1>
-        <form action="/save-student" method="post">
-        <table style='border-collapse:collapse;table-layout:auto'>
-            <tbody>
+        <form action="/save-student" method="post" style="display:inline-block">
             <%=request.getAttribute("rows")%>
-            </tbody>
-        </table>
         <button type="submit">Save</button>
         <button type="button" onclick="backToClasses()">Back to classes</button>
         <button type="button" onclick="downloadTable()">Download this table</button>
@@ -38,6 +34,14 @@
         function backToClasses() {
             if (isSaved || window.confirm('Are you sure you want to exit without saving?'))
                 window.location = '/classes';
+        }
+        
+        function resizeInput(input) {
+            if (input.value.length < 10)
+                input.size = 10;
+            else
+                input.size = input.value.length;
+            isSaved = false;
         }
     </script>
     </body>
