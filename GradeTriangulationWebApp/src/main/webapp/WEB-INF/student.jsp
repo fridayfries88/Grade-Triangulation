@@ -1,6 +1,6 @@
 <%-- 
-    Document   : assignment
-    Created on : Jun 2, 2024, 12:52:30 p.m.
+    Document   : student
+    Created on : Jun 7, 2024, 1:19:51 p.m.
     Author     : alexp
 --%>
 <style>
@@ -56,7 +56,7 @@
     <body>
     <center>
         <h1><%=request.getAttribute("name")%></h1>
-        <form action="/save-assignment" method="post">
+        <form action="/save-student" method="post">
         <table style='border-collapse:collapse;table-layout:auto;width:100%'>
             <tr>
                 <th>Student</th>
@@ -68,7 +68,7 @@
         <button type="button" onclick="if (window.confirm('Make sure you have saved. Cancel to go back and save')) window.location = '/classes'">Back to classes</button>
         <button type="button" onclick="downloadTable()">Download this table</button>
         </form>
-    </center>
+    </center>   
     <script>
         function setValue(val) {
             var cell = val.parentElement.parentElement;

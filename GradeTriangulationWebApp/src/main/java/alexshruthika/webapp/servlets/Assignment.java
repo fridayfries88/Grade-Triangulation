@@ -103,7 +103,6 @@ public class Assignment extends PrivateServlet {
         String[] columnNames = new String[metaData.getColumnCount() - 1];
         for (int i = 2; i <= metaData.getColumnCount(); i++) {
             columnNames[i-2] = metaData.getColumnName(i);
-            columnNames[i-2] = columnNames[i-2].substring(0, columnNames[i-2].lastIndexOf('_'));
         }
         return columnNames;
     }
@@ -112,7 +111,7 @@ public class Assignment extends PrivateServlet {
         String out = "";
         for (int i = 0; i < columnNames.length; i++) {
             // make string for header cell
-            out += "<th>" + columnNames[i] + "<input name=\"header"
+            out += "<th style=\"max-width:100%;white-space:nowrap\">" + columnNames[i].substring(0, columnNames[i].lastIndexOf('_')) + "<input name=\"header"
                 + i + "\" type=\"hidden\" value=\"" + columnNames[i] + "\"></th>";
         }
         return out;
@@ -133,7 +132,8 @@ public class Assignment extends PrivateServlet {
             if (types.get(criteriaTypes[i])[0] == null) {
                 out += "<td style=\"max-width:100%;white-space:nowrap\">"
                     + "<input name=\"" + student + "_" + i + "\" type=\"text\""
-                    + " class=\"value\" style=\"resize:horizontal\"></td>\n";
+                    + " class=\"value\" style=\"resize:horizontal\" value=\""
+                    + (values[i] != null ? values[i] : "") + "\"></td>\n";
                 continue;
             }
             // if type is percent, make number from 0-100
@@ -141,15 +141,15 @@ public class Assignment extends PrivateServlet {
                 out += "<td style=\"max-width:100%;white-space:nowrap\">"
                     + "<input name=\"" + student + "_" + i + "\" type=\"number\""
                     + " type=\"range\" min=\"0\" max=\"100\" step=\"0.5\""
-                    + " class=\"value\"></td>\n";
+                    + " class=\"value\" value=\"" + (values[i] != null ? values[i] : "") + "\"></td>\n";
                 continue;
             }
             out += "<td style=\"max-width:100%;white-space:nowrap\">"
                 + "<div class=\"dropdown\">\n"
                     + "<button type=\"button\" class=\"dropbtn\""
-                    + " style=\"resize:horizontal\">" + values[i] + "</button>\n"
+                    + " style=\"resize:horizontal\">" + (values[i] != null ? values[i] : "[Dropdown]") + "</button>\n"
                     + "<input name=\"" + student + "_" + i + "\" type=\"hidden\""
-                    + " class=\"value\">\n"
+                    + " value=\"" + (values[i] != null ? values[i] : "") + "\" class=\"value\">\n"
                     + "<div class=\"dropdown-content\">\n";
             for (String j : types.get(criteriaTypes[i])) {
                 if (j == null) break;

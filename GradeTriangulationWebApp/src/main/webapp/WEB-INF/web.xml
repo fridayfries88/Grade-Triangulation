@@ -32,6 +32,14 @@
         <servlet-name>SaveAssignment</servlet-name>
         <servlet-class>alexshruthika.webapp.servlets.SaveAssignment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Students</servlet-name>
+        <servlet-class>alexshruthika.webapp.servlets.Students</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Student</servlet-name>
+        <servlet-class>alexshruthika.webapp.servlets.Student</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewClass</servlet-name>
         <url-pattern>/new-class</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>SaveAssignment</servlet-name>
         <url-pattern>/save-assignment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Students</servlet-name>
+        <url-pattern>/students</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Student</servlet-name>
+        <url-pattern>/student</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

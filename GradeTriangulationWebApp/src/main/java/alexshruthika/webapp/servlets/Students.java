@@ -14,10 +14,10 @@ import alexshruthika.webapp.PrivateServlet;
 import alexshruthika.webapp.DatabaseConnection;
 
 /**
- * TODO: allow searching by unit and type
+ *
  * @author alexp
  */
-public class Assignments extends PrivateServlet {
+public class Students extends PrivateServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +35,7 @@ public class Assignments extends PrivateServlet {
         // if just getting sent here, set session data and reload to avoid id in url
         if (request.getParameter("classID") != null) {
             request.getSession().setAttribute("classID", Integer.valueOf(request.getParameter("classID")));
-            response.sendRedirect("/assignments");
+            response.sendRedirect("/students");
             return;
         }
         // send back to classes if no classID
@@ -60,31 +60,32 @@ public class Assignments extends PrivateServlet {
                                             + "SEM" + result.getInt("semester") + ", "
                                             + "P" + result.getInt("period")); // TODO
         
-            // get assignments
-            String assignments = "";
+            // get students
+            String students = "";
             st = DatabaseConnection.init().prepareStatement(
-            "select * from assignments where assignment_class_id=?");
+            "select * from students where student_class_id=?");
             st.setInt(1, classID);
             result = st.executeQuery();
             while (result.next()) {
-                assignments += makeAssignment(result);
+                students += makeStudent(result);
             }
-            if (assignments.isEmpty()) {
-                assignments = "You do not have any assignments. <button onclick='window.location = \"/new-assignment\"'>Create one now.</button>";
+            if (students.isEmpty()) {
+                students = "You do not have any students. <button onclick='window.location = \"/new-student\"'>Add some now.</button>";
             } else {
-                assignments += "<button onclick='window.location = \"/new-assignment\"'>Create new assignment</button>";
+                students += "<br><button onclick='window.location = \"/new-student\"'>Add a student</button>";
             }
-            request.setAttribute("assignments", assignments);
+            request.setAttribute("students", students);
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Error: " + e);
         }
         
-        request.getRequestDispatcher("/WEB-INF/assignments.jsp").include(request, response);
+        request.getRequestDispatcher("/WEB-INF/students.jsp").include(request, response);
     }
-
-    private String makeAssignment(ResultSet result) throws SQLException {
-        return "<button onclick='window.location = \"/assignment?assignmentID=" +
-             result.getInt("id") + "\"'>" + result.getString("name") + "</button><br>\n";
+    
+    private String makeStudent(ResultSet result) throws SQLException {
+        return "<button onclick='window.location = \"/student?studentID="
+             + result.getInt("id") + "\"'>" + result.getString("first_name")
+             + " " + result.getString("last_name") + "</button><br>\n";
     }
 
     /**
@@ -94,7 +95,7 @@ public class Assignments extends PrivateServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Shows all assignments of a class";
-    }// </editor-fold>
+        return "Lists all students with buttons to redirct to student page";
+    }
 
 }

@@ -67,16 +67,17 @@ public class NewAssignment extends PrivateServlet {
         String[][] out;
         ArrayList<String> names = new ArrayList();
         ArrayList<String> types = new ArrayList();
-        names.add(request.getParameter("criterium0"));
-        types.add(request.getParameter("type0"));
         int i;
-        for (i = 1; names.getLast() != null && types.getLast() != null; i++) {
-            names.add(request.getParameter("criterium" + i));
+        for (i = 0; request.getParameter("criterium" + i) != null && request.getParameter("type" + i) != null; i++) {
+            if (names.contains(request.getParameter("criterium" + i).toLowerCase())) {
+                continue;
+            }
+            names.add(request.getParameter("criterium" + i).toLowerCase());
             types.add(request.getParameter("type" + i));
         }
-        if (i == 1)
+        if (i == 0)
             return new String[][]{{"No Criteria. Make sure rows are filled in order."}};
-        out = new String[2][names.size()];
+        out = new String[][]{new String[names.size()], new String[names.size()]};
         out[0] = names.toArray(out[0]);
         out[1] = types.toArray(out[1]);
         return out;
@@ -107,7 +108,7 @@ public class NewAssignment extends PrivateServlet {
             "create table assignment" + id + "(\n" +
                 "`assignment" + id + "_student_id` int unsigned not null,\n";
             int i;
-            for (i = 0; i < criteria[0].length - 1; i++) {
+            for (i = 0; i < criteria[0].length; i++) {
                 columnNames[i] = "`" + criteria[0][i] + "_" + criteria[1][i] + "`";
                 tableStatement += columnNames[i] + " varchar(100),\n";
             }
