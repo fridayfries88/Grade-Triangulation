@@ -130,7 +130,7 @@ public class Student extends PrivateServlet {
                 out += "<td style=\"white-space:nowrap\">"
                     + "<input name=\"" + assignmentID + "_" + i + "\" type=\"number\""
                     + " min=\"0\" max=\"100\" class=\"value\" value=\""
-                    + value + "\" size='7'></td>\n";
+                    + value + "\" size='7' onkeydown='isSaved = false'></td>\n";
                 continue;
             }
             out += "<td style=\"white-space:nowrap\">"

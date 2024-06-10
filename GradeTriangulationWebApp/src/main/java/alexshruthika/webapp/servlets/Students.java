@@ -85,7 +85,8 @@ public class Students extends PrivateServlet {
     private String makeStudent(ResultSet result) throws SQLException {
         return "<button onclick='window.location = \"/student?studentID="
              + result.getInt("id") + "\"'>" + result.getString("first_name")
-             + " " + result.getString("last_name") + "</button><br>\n";
+             + " " + result.getString("last_name") + "</button>"+ "<button onclick='deleteStudent(\"" + result.getString("first_name")
+             + " " + result.getString("last_name") + "\", " + result.getInt("id") + ")'>delete</button><br>\n";
     }
 
     /**

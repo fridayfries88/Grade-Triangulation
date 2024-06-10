@@ -44,6 +44,14 @@
         <servlet-name>SaveStudent</servlet-name>
         <servlet-class>alexshruthika.webapp.servlets.SaveStudent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewStudent</servlet-name>
+        <servlet-class>alexshruthika.webapp.servlets.NewStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStudent</servlet-name>
+        <servlet-class>alexshruthika.webapp.servlets.DeleteStudent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewClass</servlet-name>
         <url-pattern>/new-class</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>SaveStudent</servlet-name>
         <url-pattern>/save-student</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewStudent</servlet-name>
+        <url-pattern>/new-student</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStudent</servlet-name>
+        <url-pattern>/delete-student</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

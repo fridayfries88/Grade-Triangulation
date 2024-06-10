@@ -41,6 +41,14 @@
             if (isSaved || window.confirm('Are you sure you want to exit without saving?'))
                 window.location = '/classes';
         }
+        
+        function resizeInput(input) {
+            if (input.value.length < 10)
+                input.size = 10;
+            else
+                input.size = input.value.length;
+            isSaved = false;
+        }
     </script>
     </body>
 </html>

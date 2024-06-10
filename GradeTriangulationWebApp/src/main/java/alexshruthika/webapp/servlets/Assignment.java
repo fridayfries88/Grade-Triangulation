@@ -134,32 +134,36 @@ public class Assignment extends PrivateServlet {
     * @return String of html to make row of dropdowns for each criterium
     */
     private String makeRow(String studentName, int studentID, String[] values, HashMap<String, String[]> types, String[] criteriaTypes) {
+        int valueLength;
         String out =  "<tr>\n" +
                         "<td style=\"max-width:100%;white-space:nowrap\">" + studentName + "</td>\n";
         for (int i = 0; i < criteriaTypes.length; i++) {
+            if (values[i] == null) values[i] = "";
             // if no options, make text input instead of dropdown
             if (types.get(criteriaTypes[i])[0] == null) {
+                valueLength = values[i].length();
                 out += "<td style=\"max-width:100%;white-space:nowrap\">"
                     + "<input name=\"" + studentID + "_" + i + "\" type=\"text\""
-                    + " class=\"value\" style=\"resize:horizontal\" value=\""
-                    + (values[i] != null ? values[i] : "") + "\""
-                    + "onkeydown=\"isSaved = false\"></td>\n";
+                    + " class=\"value\" style=\"resize:horizontal\" value='"
+                    + values[i] + "' maxlength='500'"
+                    + " size='" + (valueLength < 10 ? 10 : valueLength)
+                    + "' onkeyup='resizeInput(this)'></td>\n";
                 continue;
             }
             // if type is percent, make number from 0-100
             if (types.get(criteriaTypes[i])[0].equals("////percentage////")) {
-                out += "<td style=\"max-width:100%;white-space:nowrap\">"
-                    + "<input name=\"" + studentID + "_" + i + "\" type=\"number\""
-                    + " min=\"0\" max=\"100\" onkeydown=\"isSaved = false\""
-                    + " class=\"value\" value=\"" + (values[i] != null ? values[i] : "") + "\"></td>\n";
+                out += "<td style='max-width:100%;white-space:nowrap'>"
+                    + "<input name='" + studentID + "_" + i + "' type='number'"
+                    + " min='0' max='100' size='7' onkeydown='isSaved = false'"
+                    + " class='value' value='" + values[i] + "'></td>\n";
                 continue;
             }
             out += "<td style=\"max-width:100%;white-space:nowrap\">"
                 + "<div class=\"dropdown\">\n"
                     + "<button type=\"button\" class=\"dropbtn\""
-                    + " style=\"resize:horizontal\">" + (values[i] != null && !values[i].isEmpty() ? values[i] : "[Dropdown]") + "</button>\n"
+                    + " style=\"resize:horizontal\">" + (!values[i].isEmpty() ? values[i] : "[Dropdown]") + "</button>\n"
                     + "<input name=\"" + studentID + "_" + i + "\" type=\"hidden\""
-                    + " value=\"" + (values[i] != null ? values[i] : "") + "\" class=\"value\">\n"
+                    + " value=\"" + values[i] + "\" class=\"value\">\n"
                     + "<div class=\"dropdown-content\">\n";
             for (String j : types.get(criteriaTypes[i])) {
                 if (j == null) break;

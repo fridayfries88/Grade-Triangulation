@@ -16,5 +16,11 @@
         <h1><%=request.getAttribute("classInfo")%></h1>
         <%=request.getAttribute("students")%>
     </center>
+    <script>
+        function deleteStudent(name, id) {
+             if (window.confirm("Are you sure you want to delete " + name + "?"))
+                 window.location = "/delete-student?id=" + id;
+        }
+    </script>
     </body>
 </html>

@@ -61,7 +61,7 @@ public class NewAssignment extends PrivateServlet {
     /**
      * 
      * @param request
-     * @return 2 elemenet array: 0 = names, 1 = types
+     * @return 2 element array: 0 = names, 1 = types
      */
     private String[][] checkCriteria(HttpServletRequest request) {
         String[][] out;
@@ -165,35 +165,6 @@ public class NewAssignment extends PrivateServlet {
         return out;
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
     /**
      * Returns a short description of the servlet.
      *
@@ -201,7 +172,7 @@ public class NewAssignment extends PrivateServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Page to create an assignment";
     }// </editor-fold>
 
 }
