@@ -16,234 +16,60 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `assignment1`
+-- Table structure for table `assignment21`
 --
 
-DROP TABLE IF EXISTS `assignment1`;
+DROP TABLE IF EXISTS `assignment21`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `assignment1` (
-  `assignment1_student_id` int unsigned NOT NULL,
-  `TextBox_Text` varchar(100) DEFAULT NULL,
-  `Percent_Percentage` varchar(100) DEFAULT NULL,
-  `Yes or No_Yes/No` varchar(100) DEFAULT NULL,
-  `extra 4_Text` varchar(100) DEFAULT NULL,
-  `extra 5_Text` varchar(100) DEFAULT NULL,
-  `extra 6_Text` varchar(100) DEFAULT NULL,
-  `extra 7_Text` varchar(100) DEFAULT NULL,
-  `extra 8_Text` varchar(100) DEFAULT NULL,
-  `extra 9_Text` varchar(100) DEFAULT NULL,
-  `extra 10_Text` varchar(100) DEFAULT NULL,
-  `extra 11_Text` varchar(100) DEFAULT NULL,
-  `extra 12_Text` varchar(100) DEFAULT NULL,
-  `extra 13_Text` varchar(100) DEFAULT NULL,
-  `extra 14_Text` varchar(100) DEFAULT NULL,
-  `extra 15_Text` varchar(100) DEFAULT NULL,
-  KEY `assignment1_student_id` (`assignment1_student_id`),
-  CONSTRAINT `assignment1_student_id` FOREIGN KEY (`assignment1_student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+CREATE TABLE `assignment21` (
+  `assignment21_student_id` int unsigned NOT NULL,
+  `text_Text` varchar(500) DEFAULT NULL,
+  `grade_Grade` varchar(500) DEFAULT NULL,
+  `check_Yes/No` varchar(500) DEFAULT NULL,
+  `percent_Percentage` varchar(500) DEFAULT NULL,
+  `Additional notes_Text` varchar(500) DEFAULT NULL,
+  KEY `assignment21_student_id` (`assignment21_student_id`),
+  CONSTRAINT `assignment21_student_id` FOREIGN KEY (`assignment21_student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `assignment1`
+-- Dumping data for table `assignment21`
 --
 
-LOCK TABLES `assignment1` WRITE;
-/*!40000 ALTER TABLE `assignment1` DISABLE KEYS */;
-INSERT INTO `assignment1` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `assignment1` ENABLE KEYS */;
+LOCK TABLES `assignment21` WRITE;
+/*!40000 ALTER TABLE `assignment21` DISABLE KEYS */;
+INSERT INTO `assignment21` VALUES (22,'n','1-','yes','',''),(23,NULL,NULL,NULL,NULL,NULL),(24,NULL,NULL,NULL,NULL,NULL),(25,NULL,NULL,NULL,NULL,NULL),(26,NULL,NULL,NULL,NULL,NULL),(27,NULL,NULL,NULL,NULL,NULL),(28,NULL,NULL,NULL,NULL,NULL),(29,NULL,NULL,NULL,NULL,NULL),(30,NULL,NULL,NULL,NULL,NULL),(31,NULL,NULL,NULL,NULL,NULL),(32,NULL,NULL,NULL,NULL,NULL),(33,NULL,NULL,NULL,NULL,NULL),(34,NULL,NULL,NULL,NULL,NULL),(35,NULL,NULL,NULL,NULL,NULL),(36,NULL,NULL,NULL,NULL,NULL),(37,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `assignment21` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `assignment10`
+-- Table structure for table `assignment22`
 --
 
-DROP TABLE IF EXISTS `assignment10`;
+DROP TABLE IF EXISTS `assignment22`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `assignment10` (
-  `assignment_student_id` int unsigned NOT NULL,
-  `jhfd_Yes/No` varchar(100) DEFAULT NULL,
-  `hidigv_////percentage////` varchar(100) DEFAULT NULL,
-  `dsiugfaiu_Text` varchar(100) DEFAULT NULL,
-  `misc3_Text` varchar(100) DEFAULT NULL,
-  `misc4_Text` varchar(100) DEFAULT NULL,
-  `misc5_Text` varchar(100) DEFAULT NULL,
-  `misc6_Text` varchar(100) DEFAULT NULL,
-  `misc7_Text` varchar(100) DEFAULT NULL,
-  `misc8_Text` varchar(100) DEFAULT NULL,
-  `misc9_Text` varchar(100) DEFAULT NULL,
-  `misc10_Text` varchar(100) DEFAULT NULL,
-  `misc11_Text` varchar(100) DEFAULT NULL,
-  `misc12_Text` varchar(100) DEFAULT NULL,
-  `misc13_Text` varchar(100) DEFAULT NULL,
-  `misc14_Text` varchar(100) DEFAULT NULL,
-  KEY `assignment_student_id` (`assignment_student_id`),
-  CONSTRAINT `assignment_student_id` FOREIGN KEY (`assignment_student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+CREATE TABLE `assignment22` (
+  `assignment22_student_id` int unsigned NOT NULL,
+  `grade_Grade` varchar(500) DEFAULT NULL,
+  `grade 2_Grade` varchar(500) DEFAULT NULL,
+  `text box_Text` varchar(500) DEFAULT NULL,
+  `Additional notes_Text` varchar(500) DEFAULT NULL,
+  KEY `assignment22_student_id` (`assignment22_student_id`),
+  CONSTRAINT `assignment22_student_id` FOREIGN KEY (`assignment22_student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `assignment10`
+-- Dumping data for table `assignment22`
 --
 
-LOCK TABLES `assignment10` WRITE;
-/*!40000 ALTER TABLE `assignment10` DISABLE KEYS */;
-/*!40000 ALTER TABLE `assignment10` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `assignment14`
---
-
-DROP TABLE IF EXISTS `assignment14`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `assignment14` (
-  `assignment14_student_id` int unsigned NOT NULL,
-  `eghj_Text` varchar(100) DEFAULT NULL,
-  `misc1_Text` varchar(100) DEFAULT NULL,
-  `misc2_Text` varchar(100) DEFAULT NULL,
-  `misc3_Text` varchar(100) DEFAULT NULL,
-  `misc4_Text` varchar(100) DEFAULT NULL,
-  `misc5_Text` varchar(100) DEFAULT NULL,
-  `misc6_Text` varchar(100) DEFAULT NULL,
-  `misc7_Text` varchar(100) DEFAULT NULL,
-  `misc8_Text` varchar(100) DEFAULT NULL,
-  `misc9_Text` varchar(100) DEFAULT NULL,
-  `misc10_Text` varchar(100) DEFAULT NULL,
-  `misc11_Text` varchar(100) DEFAULT NULL,
-  `misc12_Text` varchar(100) DEFAULT NULL,
-  `misc13_Text` varchar(100) DEFAULT NULL,
-  `misc14_Text` varchar(100) DEFAULT NULL,
-  KEY `assignment14_student_id` (`assignment14_student_id`),
-  CONSTRAINT `assignment14_student_id` FOREIGN KEY (`assignment14_student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `assignment14`
---
-
-LOCK TABLES `assignment14` WRITE;
-/*!40000 ALTER TABLE `assignment14` DISABLE KEYS */;
-/*!40000 ALTER TABLE `assignment14` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `assignment15`
---
-
-DROP TABLE IF EXISTS `assignment15`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `assignment15` (
-  `assignment15_student_id` int unsigned NOT NULL,
-  `text_Text` varchar(100) DEFAULT NULL,
-  `yes/no_Yes/No` varchar(100) DEFAULT NULL,
-  `percent_////percentage////` varchar(100) DEFAULT NULL,
-  `extra3_Text` varchar(100) DEFAULT NULL,
-  `extra4_Text` varchar(100) DEFAULT NULL,
-  `extra5_Text` varchar(100) DEFAULT NULL,
-  `extra6_Text` varchar(100) DEFAULT NULL,
-  `extra7_Text` varchar(100) DEFAULT NULL,
-  `extra8_Text` varchar(100) DEFAULT NULL,
-  `extra9_Text` varchar(100) DEFAULT NULL,
-  `extra10_Text` varchar(100) DEFAULT NULL,
-  `extra11_Text` varchar(100) DEFAULT NULL,
-  `extra12_Text` varchar(100) DEFAULT NULL,
-  `extra13_Text` varchar(100) DEFAULT NULL,
-  `extra14_Text` varchar(100) DEFAULT NULL,
-  KEY `assignment15_student_id` (`assignment15_student_id`),
-  CONSTRAINT `assignment15_student_id` FOREIGN KEY (`assignment15_student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `assignment15`
---
-
-LOCK TABLES `assignment15` WRITE;
-/*!40000 ALTER TABLE `assignment15` DISABLE KEYS */;
-/*!40000 ALTER TABLE `assignment15` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `assignment16`
---
-
-DROP TABLE IF EXISTS `assignment16`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `assignment16` (
-  `assignment16_student_id` int unsigned NOT NULL,
-  `text_Text` varchar(100) DEFAULT NULL,
-  `bool_Yes/No` varchar(100) DEFAULT NULL,
-  `num_Percentage` varchar(100) DEFAULT NULL,
-  `extra3_Text` varchar(100) DEFAULT NULL,
-  `extra4_Text` varchar(100) DEFAULT NULL,
-  `extra5_Text` varchar(100) DEFAULT NULL,
-  `extra6_Text` varchar(100) DEFAULT NULL,
-  `extra7_Text` varchar(100) DEFAULT NULL,
-  `extra8_Text` varchar(100) DEFAULT NULL,
-  `extra9_Text` varchar(100) DEFAULT NULL,
-  `extra10_Text` varchar(100) DEFAULT NULL,
-  `extra11_Text` varchar(100) DEFAULT NULL,
-  `extra12_Text` varchar(100) DEFAULT NULL,
-  `extra13_Text` varchar(100) DEFAULT NULL,
-  `extra14_Text` varchar(100) DEFAULT NULL,
-  KEY `assignment16_student_id` (`assignment16_student_id`),
-  CONSTRAINT `assignment16_student_id` FOREIGN KEY (`assignment16_student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `assignment16`
---
-
-LOCK TABLES `assignment16` WRITE;
-/*!40000 ALTER TABLE `assignment16` DISABLE KEYS */;
-INSERT INTO `assignment16` VALUES (4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `assignment16` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `assignment17`
---
-
-DROP TABLE IF EXISTS `assignment17`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `assignment17` (
-  `assignment17_student_id` int unsigned NOT NULL,
-  `TextBox_Text` varchar(100) DEFAULT NULL,
-  `Percent_Percentage` varchar(100) DEFAULT NULL,
-  `Yes or No_Yes/No` varchar(100) DEFAULT NULL,
-  `extra 4_Text` varchar(100) DEFAULT NULL,
-  `extra 5_Text` varchar(100) DEFAULT NULL,
-  `extra 6_Text` varchar(100) DEFAULT NULL,
-  `extra 7_Text` varchar(100) DEFAULT NULL,
-  `extra 8_Text` varchar(100) DEFAULT NULL,
-  `extra 9_Text` varchar(100) DEFAULT NULL,
-  `extra 10_Text` varchar(100) DEFAULT NULL,
-  `extra 11_Text` varchar(100) DEFAULT NULL,
-  `extra 12_Text` varchar(100) DEFAULT NULL,
-  `extra 13_Text` varchar(100) DEFAULT NULL,
-  `extra 14_Text` varchar(100) DEFAULT NULL,
-  `extra 15_Text` varchar(100) DEFAULT NULL,
-  KEY `assignment17_student_id` (`assignment17_student_id`),
-  CONSTRAINT `assignment17_student_id` FOREIGN KEY (`assignment17_student_id`) REFERENCES `students` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `assignment17`
---
-
-LOCK TABLES `assignment17` WRITE;
-/*!40000 ALTER TABLE `assignment17` DISABLE KEYS */;
-INSERT INTO `assignment17` VALUES (7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(9,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `assignment17` ENABLE KEYS */;
+LOCK TABLES `assignment22` WRITE;
+/*!40000 ALTER TABLE `assignment22` DISABLE KEYS */;
+INSERT INTO `assignment22` VALUES (22,'','','sdf',''),(23,'','','',''),(24,'','','g',''),(25,'','','',''),(26,'','','',''),(27,'','','',''),(28,'','','',''),(29,'','','',''),(30,'','','',''),(31,'','','',''),(32,'','','',''),(33,'','','',''),(34,'','','',''),(35,'','','',''),(36,'','','',''),(37,'','','','');
+/*!40000 ALTER TABLE `assignment22` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -261,8 +87,8 @@ CREATE TABLE `assignments` (
   `unit` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `class_id` (`assignment_class_id`),
-  CONSTRAINT `class_id` FOREIGN KEY (`assignment_class_id`) REFERENCES `classes` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `class_id` FOREIGN KEY (`assignment_class_id`) REFERENCES `classes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -271,7 +97,7 @@ CREATE TABLE `assignments` (
 
 LOCK TABLES `assignments` WRITE;
 /*!40000 ALTER TABLE `assignments` DISABLE KEYS */;
-INSERT INTO `assignments` VALUES (8,6,'sfgh','artyu',NULL),(9,6,'ouoig','fyg',NULL),(10,6,'yudwgf','uysadtf',NULL),(11,6,'jhg','tytkl',NULL),(12,6,'dtfhgj','ftgfg',NULL),(13,6,'asdfgjk','sdfghjkl',NULL),(14,6,'dfghj','dfghjk',NULL),(15,6,'a','abcd',NULL),(16,6,'dKNFH','FDAJSH',NULL),(17,7,'Test','TestAssignment',NULL);
+INSERT INTO `assignments` VALUES (21,10,'Lab','Lab 1',NULL),(22,10,'Lab','Lab 2',NULL);
 /*!40000 ALTER TABLE `assignments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,8 +117,8 @@ CREATE TABLE `classes` (
   `period` tinyint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -301,7 +127,7 @@ CREATE TABLE `classes` (
 
 LOCK TABLES `classes` WRITE;
 /*!40000 ALTER TABLE `classes` DISABLE KEYS */;
-INSERT INTO `classes` VALUES (1,1,'SCH4U.03',2024,2,1),(3,1,'ICS4U.05',2024,2,4),(6,1,'asdfghjk',2024,1,1),(7,5,'TestClass',2024,2,4);
+INSERT INTO `classes` VALUES (10,7,'ICS4U.01',2024,2,4);
 /*!40000 ALTER TABLE `classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,8 +145,8 @@ CREATE TABLE `students` (
   `last_name` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `student_class_id` (`student_class_id`),
-  CONSTRAINT `student_class_id` FOREIGN KEY (`student_class_id`) REFERENCES `classes` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `student_class_id` FOREIGN KEY (`student_class_id`) REFERENCES `classes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -329,7 +155,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (4,6,'asdfg','dfghjk'),(5,6,'sd','ghjk'),(6,6,'sdfg','ohd'),(7,7,'First','Last'),(8,7,'First2','Last2'),(9,7,'First3','Last3');
+INSERT INTO `students` VALUES (22,10,'a','aa'),(23,10,'b','bb'),(24,10,'c','cc'),(25,10,'d','dd'),(26,10,'e','ee'),(27,10,'f','ff'),(28,10,'g','gg'),(29,10,'h','hh'),(30,10,'i','ii'),(31,10,'j','jj'),(32,10,'k','kk'),(33,10,'l','ll'),(34,10,'m','mm'),(35,10,'n','nn'),(36,10,'o','oo'),(37,10,'p','pp');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,7 +190,7 @@ CREATE TABLE `types` (
 
 LOCK TABLES `types` WRITE;
 /*!40000 ALTER TABLE `types` DISABLE KEYS */;
-INSERT INTO `types` VALUES ('Yes/No','yes','no',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Text',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Percentage','////percentage////',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `types` VALUES ('Yes/No','yes','no',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Text',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Percentage','////percentage////',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Grade','R','1-','1','1+','2-','2','2+','3-','3','3+','4-','4','4+');
 /*!40000 ALTER TABLE `types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,7 +206,7 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -389,7 +215,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'apych1','1234'),(5,'TestAccount','password');
+INSERT INTO `users` VALUES (7,'Alex Pychyl','password');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -402,4 +228,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-07  9:02:24
+-- Dump completed on 2024-06-10 11:00:05
