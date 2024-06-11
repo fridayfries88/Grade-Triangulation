@@ -7,8 +7,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : alexp
 */
 body {
-    background-color: #fff;
-    color: #000;
+    background-color: #f7f9fc;
     font-family: Arial, sans-serif;
 }
 
@@ -17,23 +16,27 @@ h1 {
 }
 
 table{
-    background-color: #eee;
+    background-color: #fff;
     border-collapse: separate;
-    border-color: #eee;
+    border-color: #fff;
     border-radius: 10px;
     border-style: solid;
     border-width: 3px;
 }
 
-td, th{
-    border-bottom: 3px solid #757575;
+td {
+    border-bottom: 3px solid #aaa;
 }
 
 button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #0066ff;
+    background-color: #007bff;
     color: #fff;
     cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
