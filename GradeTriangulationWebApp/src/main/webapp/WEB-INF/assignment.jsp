@@ -15,7 +15,7 @@
     <center>
         <h1><%=request.getAttribute("name")%></h1>
         <form action="/save-assignment" method="post">
-        <table style='border-collapse:collapse;table-layout:auto'>
+        <table style='border-collapse:separate;table-layout:auto;border-spacing:5px'>
             <tr>
                 <th>Student</th>
                 <%=request.getAttribute("criteria")%>

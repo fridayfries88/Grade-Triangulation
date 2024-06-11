@@ -15,10 +15,12 @@
     <center>
         <h1><%=request.getAttribute("name")%></h1>
         <form action="/save-student" method="post" style="display:inline-block">
-            <%=request.getAttribute("rows")%>
-        <button type="submit">Save</button>
-        <button type="button" onclick="backToClasses()">Back to classes</button>
-        <button type="submit" name="download">Download this table</button>
+            <div align="left">
+                <%=request.getAttribute("rows")%>
+            </div>
+            <button type="submit">Save</button>
+            <button type="button" onclick="backToClasses()">Back to classes</button>
+            <button type="submit" name="download">Download this table</button>
         </form>
     </center>   
     <script>

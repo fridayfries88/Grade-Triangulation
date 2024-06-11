@@ -6,13 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-
-    <meta charset="UTF-8">
+<html>
+    <link rel="stylesheet" href="/styles/login.css" type="text/css">
+<head>
     <title>Log In</title>
-     <link rel="stylesheet" href="<c:url value='/Web Pages/styles/styles.css' />">
-
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
 <body>
 <center>
     <div class="login-container">
@@ -26,14 +25,14 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <input id="password" name="password" type="password" required>
-                <input type="checkbox" onclick="togglePassword()"> show
+                <input type="checkbox" onclick="togglePassword()"> show password
             </div>
             <button type="submit">Log In</button>
             <div class="error-message">
                 <%= request.getAttribute("error") %>
             </div>
         </form>
-        <button class="signup-button" type="button" onclick="window.location='/sign-up'">No Account? Sign Up Here</button>
+        <button class="redirect-button" type="button" onclick="window.location='/sign-up'">No Account? Sign Up Here</button>
     </div>
 </center>
     <script>
@@ -47,4 +46,5 @@
         }
     </script>
 </body>
+</html>
 

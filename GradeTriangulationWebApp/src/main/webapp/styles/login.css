@@ -82,12 +82,12 @@ button:hover {
     background-color: #0056b3;
 }
 
-.signup-button {
+.redirect-button {
     background-color: #28a745;
     margin-top: 15px;
 }
 
-.signup-button:hover {
+.redirect-button:hover {
     background-color: #218838;
 }
 

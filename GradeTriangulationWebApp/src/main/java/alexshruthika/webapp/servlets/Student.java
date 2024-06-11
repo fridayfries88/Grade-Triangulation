@@ -90,7 +90,7 @@ public class Student extends PrivateServlet {
     }
     
     private String makeRow(String assignmentName, int assignmentID, ResultSet row, HashMap<String, String[]> types) throws SQLException {
-        String out = "<table style='border-collapse:collapse;table-layout:auto;width:100%'><tr><th></th>\n"; // maybe add date/type in this box
+        String out = "<table style='border-collapse:separate;table-layout:auto;border-spacing:5px'><tr><th></th>\n"; // maybe add date/type in this box
         // get criteria names and types
         String[] columnNames = new String[row.getMetaData().getColumnCount() - 1];
         String[] criteria = new String[columnNames.length];

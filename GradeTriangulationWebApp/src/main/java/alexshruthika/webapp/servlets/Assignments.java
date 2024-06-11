@@ -72,7 +72,7 @@ public class Assignments extends PrivateServlet {
             if (assignments.isEmpty()) {
                 assignments = "You do not have any assignments. <button onclick='window.location = \"/new-assignment\"'>Create one now.</button>";
             } else {
-                assignments += "<button onclick='window.location = \"/new-assignment\"'>Create new assignment</button>";
+                assignments += "<br><button onclick='window.location = \"/new-assignment\"'>Create new assignment</button>";
             }
             request.setAttribute("assignments", assignments);
         } catch (SQLException | ClassNotFoundException e) {
@@ -84,7 +84,7 @@ public class Assignments extends PrivateServlet {
 
     private String makeAssignment(ResultSet result) throws SQLException {
         return "<button onclick='window.location = \"/assignment?assignmentID=" +
-             result.getInt("id") + "\"'>" + result.getString("name") + "</button><br>\n";
+             result.getInt("id") + "\"'>" + result.getString("name") + "</button><br><br>\n";
     }
 
     /**

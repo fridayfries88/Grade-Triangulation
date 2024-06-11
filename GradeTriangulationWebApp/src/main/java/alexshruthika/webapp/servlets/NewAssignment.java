@@ -68,7 +68,8 @@ public class NewAssignment extends PrivateServlet {
         ArrayList<String> names = new ArrayList();
         ArrayList<String> types = new ArrayList();
         int i;
-        for (i = 0; request.getParameter("criterium" + i) != null && request.getParameter("type" + i) != null; i++) {
+        for (i = 0; !request.getParameter("criterium" + i).isEmpty() && !request.getParameter("type" + i).isEmpty(); i++) {
+            System.err.println(request.getParameter("type" + i));
             if (names.contains(request.getParameter("criterium" + i).toLowerCase())) {
                 continue;
             }

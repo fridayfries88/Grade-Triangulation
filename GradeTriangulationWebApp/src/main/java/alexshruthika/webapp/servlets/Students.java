@@ -61,7 +61,7 @@ public class Students extends PrivateServlet {
                                             + "P" + result.getInt("period")); // TODO
         
             // get students
-            String students = "";
+            String students = "<table style='border-collapse:separate;table-layout:auto;border-spacing:10px'>";
             st = DatabaseConnection.init().prepareStatement(
             "select * from students where student_class_id=?");
             st.setInt(1, classID);
@@ -70,9 +70,9 @@ public class Students extends PrivateServlet {
                 students += makeStudent(result);
             }
             if (students.isEmpty()) {
-                students = "You do not have any students. <button onclick='window.location = \"/new-student\"'>Add some now.</button>";
+                students = "</table>You do not have any students. <button onclick='window.location = \"/new-student\"'>Add some now.</button>";
             } else {
-                students += "<br><button onclick='window.location = \"/new-student\"'>Add a student</button>";
+                students += "</table><button onclick='window.location = \"/new-student\"'>Add a student</button>";
             }
             request.setAttribute("students", students);
         } catch (SQLException | ClassNotFoundException e) {
@@ -83,10 +83,11 @@ public class Students extends PrivateServlet {
     }
     
     private String makeStudent(ResultSet result) throws SQLException {
-        return "<button onclick='window.location = \"/student?studentID="
+        return "<tr><td><button onclick='window.location = \"/student?studentID="
              + result.getInt("id") + "\"'>" + result.getString("first_name")
-             + " " + result.getString("last_name") + "</button>"+ "<button onclick='deleteStudent(\"" + result.getString("first_name")
-             + " " + result.getString("last_name") + "\", " + result.getInt("id") + ")'>delete</button><br>\n";
+             + " " + result.getString("last_name") + "</button></td>" 
+             + "<td><button style='background-color:#FF6060' onclick='deleteStudent(\"" + result.getString("first_name")
+             + " " + result.getString("last_name") + "\", " + result.getInt("id") + ")'>x</button></td></tr>\n";
     }
 
     /**
