@@ -40,7 +40,7 @@ CREATE TABLE `assignment21` (
 
 LOCK TABLES `assignment21` WRITE;
 /*!40000 ALTER TABLE `assignment21` DISABLE KEYS */;
-INSERT INTO `assignment21` VALUES (22,'n','1-','yes','',''),(23,NULL,NULL,NULL,NULL,NULL),(24,NULL,NULL,NULL,NULL,NULL),(25,NULL,NULL,NULL,NULL,NULL),(26,NULL,NULL,NULL,NULL,NULL),(27,NULL,NULL,NULL,NULL,NULL),(28,NULL,NULL,NULL,NULL,NULL),(29,NULL,NULL,NULL,NULL,NULL),(30,NULL,NULL,NULL,NULL,NULL),(31,NULL,NULL,NULL,NULL,NULL),(32,NULL,NULL,NULL,NULL,NULL),(33,NULL,NULL,NULL,NULL,NULL),(34,NULL,NULL,NULL,NULL,NULL),(35,NULL,NULL,NULL,NULL,NULL),(36,NULL,NULL,NULL,NULL,NULL),(37,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `assignment21` VALUES (22,'n','1-','yes','42','Good'),(23,'','','','',''),(24,'','','','',''),(25,'','','','',''),(26,'','3-','','',''),(27,'','','','',''),(28,'','','','',''),(29,'gyf','','yes','',''),(30,'','','','',''),(31,'','','','',''),(32,'','','','',''),(33,'','4+','','',''),(34,'','','','',''),(35,'','','','',''),(36,'','','','',''),(37,'','','','',''),(39,'','','','','');
 /*!40000 ALTER TABLE `assignment21` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,8 +68,35 @@ CREATE TABLE `assignment22` (
 
 LOCK TABLES `assignment22` WRITE;
 /*!40000 ALTER TABLE `assignment22` DISABLE KEYS */;
-INSERT INTO `assignment22` VALUES (22,'','','sdf',''),(23,'','','',''),(24,'','','g',''),(25,'','','',''),(26,'','','',''),(27,'','','',''),(28,'','','',''),(29,'','','',''),(30,'','','',''),(31,'','','',''),(32,'','','',''),(33,'','','',''),(34,'','','',''),(35,'','','',''),(36,'','','',''),(37,'','','','');
+INSERT INTO `assignment22` VALUES (22,'2-','4-','sdf','Good'),(23,'','','',''),(24,'','','g',''),(25,'','','',''),(26,'','','',''),(27,'','','',''),(28,'','','',''),(29,'','','',''),(30,'','','',''),(31,'','','',''),(32,'','','',''),(33,'','','',''),(34,'','','',''),(35,'','','',''),(36,'','','',''),(37,'','','',''),(39,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `assignment22` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `assignment24`
+--
+
+DROP TABLE IF EXISTS `assignment24`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignment24` (
+  `assignment24_student_id` int unsigned NOT NULL,
+  `used volumetric flask_Checkbox` varchar(500) DEFAULT NULL,
+  `layed pipette perpendicular_Checkbox` varchar(500) DEFAULT NULL,
+  `Additional notes_Text` varchar(500) DEFAULT NULL,
+  KEY `assignment24_student_id` (`assignment24_student_id`),
+  CONSTRAINT `assignment24_student_id` FOREIGN KEY (`assignment24_student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assignment24`
+--
+
+LOCK TABLES `assignment24` WRITE;
+/*!40000 ALTER TABLE `assignment24` DISABLE KEYS */;
+INSERT INTO `assignment24` VALUES (22,'x','x','1'),(23,'','','2'),(24,'x','','3'),(25,'','','4'),(26,'','',''),(27,'','',''),(28,'','',''),(29,'','',''),(30,'','',''),(31,'','',''),(32,'','',''),(33,'','',''),(34,'','',''),(35,'','',''),(36,'','',''),(37,'','',''),(39,'','','');
+/*!40000 ALTER TABLE `assignment24` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -88,7 +115,7 @@ CREATE TABLE `assignments` (
   PRIMARY KEY (`id`),
   KEY `class_id` (`assignment_class_id`),
   CONSTRAINT `class_id` FOREIGN KEY (`assignment_class_id`) REFERENCES `classes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +124,7 @@ CREATE TABLE `assignments` (
 
 LOCK TABLES `assignments` WRITE;
 /*!40000 ALTER TABLE `assignments` DISABLE KEYS */;
-INSERT INTO `assignments` VALUES (21,10,'Lab','Lab 1',NULL),(22,10,'Lab','Lab 2',NULL);
+INSERT INTO `assignments` VALUES (21,10,'Lab','Lab 1',NULL),(22,10,'Lab','Lab 2',NULL),(24,10,'Lab','Lab 3',NULL);
 /*!40000 ALTER TABLE `assignments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +173,7 @@ CREATE TABLE `students` (
   PRIMARY KEY (`id`),
   KEY `student_class_id` (`student_class_id`),
   CONSTRAINT `student_class_id` FOREIGN KEY (`student_class_id`) REFERENCES `classes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +182,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (22,10,'a','aa'),(23,10,'b','bb'),(24,10,'c','cc'),(25,10,'d','dd'),(26,10,'e','ee'),(27,10,'f','ff'),(28,10,'g','gg'),(29,10,'h','hh'),(30,10,'i','ii'),(31,10,'j','jj'),(32,10,'k','kk'),(33,10,'l','ll'),(34,10,'m','mm'),(35,10,'n','nn'),(36,10,'o','oo'),(37,10,'p','pp');
+INSERT INTO `students` VALUES (22,10,'a','aa'),(23,10,'b','bb'),(24,10,'c','cc'),(25,10,'d','dd'),(26,10,'e','ee'),(27,10,'f','ff'),(28,10,'g','gg'),(29,10,'h','hh'),(30,10,'i','ii'),(31,10,'j','jj'),(32,10,'k','kk'),(33,10,'l','ll'),(34,10,'m','mm'),(35,10,'n','nn'),(36,10,'o','oo'),(37,10,'p','pp'),(39,10,'q','qq');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +217,7 @@ CREATE TABLE `types` (
 
 LOCK TABLES `types` WRITE;
 /*!40000 ALTER TABLE `types` DISABLE KEYS */;
-INSERT INTO `types` VALUES ('Yes/No','yes','no',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Text',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Percentage','////percentage////',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Grade','R','1-','1','1+','2-','2','2+','3-','3','3+','4-','4','4+');
+INSERT INTO `types` VALUES ('Yes/No','yes','no',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Text',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Percentage','////percentage////',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('Grade','R','1-','1','1+','2-','2','2+','3-','3','3+','4-','4','4+'),('Checkbox','////checkbox////',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,7 +233,7 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +242,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (7,'Alex Pychyl','password');
+INSERT INTO `users` VALUES (7,'Alex Pychyl','password'),(8,'Alex','password');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -228,4 +255,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-10 11:00:05
+-- Dump completed on 2024-06-10 20:59:01
