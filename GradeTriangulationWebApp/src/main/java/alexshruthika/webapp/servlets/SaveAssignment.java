@@ -51,8 +51,8 @@ public class SaveAssignment extends PrivateServlet {
             while (studentIDs.next()) {
                 // go through each column
                 for (int i = 0; i < 15; i++) {
+                    System.err.println(request.getParameter(studentIDs.getInt(1) + "_" + i));
                     if ((currentValue = request.getParameter(studentIDs.getInt(1) + "_" + i)) != null) {
-                        // split value into 
                         st = DatabaseConnection.init().prepareStatement(
                         "update assignment" + assignmentID + " set `"
                         + request.getParameter("header" + i) + "` = ? where assignment"
@@ -66,7 +66,10 @@ public class SaveAssignment extends PrivateServlet {
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Error: " + e);
         }
-        response.sendRedirect("/assignment");
+        if (request.getParameter("download") != null)
+            response.sendRedirect("/download-assignment");
+        else
+            response.sendRedirect("/assignment");
     }
 
     /**

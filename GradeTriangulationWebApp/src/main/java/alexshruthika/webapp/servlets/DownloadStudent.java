@@ -18,7 +18,7 @@ import alexshruthika.webapp.DatabaseConnection;
  *
  * @author alexp
  */
-public class DownloadAssignment extends PrivateServlet {
+public class DownloadStudent extends PrivateServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,36 +33,40 @@ public class DownloadAssignment extends PrivateServlet {
             throws ServletException, IOException {
         response.setContentType("text/csv");
         // send back to assignments if no assignmentID
-        if (request.getSession().getAttribute("assignmentID") == null) {
-            response.sendRedirect("/assignments");
+        if (request.getSession().getAttribute("studentID") == null) {
+            response.sendRedirect("/students");
             return;
         }
-        // get assignment and class id
-        int assignmentID = (int)request.getSession().getAttribute("assignmentID");
+        // get student and class id
+        int studentID = (int)request.getSession().getAttribute("studentID");
         
         try (Connection con = DatabaseConnection.init();
              PrintWriter out = response.getWriter()) {
+            int assignmentID;
             String value;
+            ResultSet result;
             PreparedStatement st = con.prepareStatement(
-            "select * from assignment" + assignmentID);
-            ResultSet assignment = st.executeQuery();
-            ResultSet studentName;
-            st = con.prepareStatement(
-            "select first_name, last_name from students where id=?");
-            out.print("Student");
-            for (int i = 2; i <= assignment.getMetaData().getColumnCount(); i++) {
-                value = assignment.getMetaData().getColumnName(i);
-                value = value.substring(0, value.lastIndexOf('_'));
-                out.print("," + value);
-            }
-            out.println();
-            while (assignment.next()) {
-                st.setInt(1, assignment.getInt("assignment" + assignmentID + "_student_id"));
-                studentName = st.executeQuery();
-                studentName.next();
-                out.print(studentName.getString("first_name") + " " + studentName.getString("last_name"));
-                for (int i = 2; i <= assignment.getMetaData().getColumnCount(); i++) {
-                    value = assignment.getString(i);
+            "select id, name from assignments where assignment_class_id=?");
+            st.setInt(1, (int)request.getSession().getAttribute("classID"));
+            ResultSet assignments = st.executeQuery();
+            while (assignments.next()) {
+                assignmentID = assignments.getInt("id");
+                // get assignment table value
+                st = con.prepareStatement("select * from assignment"
+                   + assignmentID + " where assignment" + assignmentID
+                   + "_student_id=?");
+                st.setInt(1, studentID);
+                result = st.executeQuery();
+                result.next();
+                // print criteria
+                for (int i = 2; i <= result.getMetaData().getColumnCount(); i++) {
+                    value = result.getMetaData().getColumnName(i);
+                    value = value.substring(0, value.lastIndexOf('_'));
+                    out.print("," + value);
+                }
+                out.print("\n" + assignments.getString("name"));
+                for (int i = 2; i <= result.getMetaData().getColumnCount(); i++) {
+                    value = result.getString(i);
                     if (value == null) value = "";
                     out.print("," + value);
                 }
@@ -81,7 +85,7 @@ public class DownloadAssignment extends PrivateServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Downloads Assignment to csv";
+        return "Downloads Student to csv";
     }// </editor-fold>
 
 }

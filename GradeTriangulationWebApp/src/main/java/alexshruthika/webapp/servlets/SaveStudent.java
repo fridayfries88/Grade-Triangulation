@@ -67,7 +67,10 @@ public class SaveStudent extends PrivateServlet {
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Error: " + e);
         }
-        response.sendRedirect("/student");
+        if (request.getParameter("download") != null)
+            response.sendRedirect("/download-student");
+        else
+            response.sendRedirect("/student");
     }
 
     /**

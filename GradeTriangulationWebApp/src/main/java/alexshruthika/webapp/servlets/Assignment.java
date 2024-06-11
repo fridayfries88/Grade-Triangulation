@@ -142,10 +142,9 @@ public class Assignment extends PrivateServlet {
             // if no options, make text input instead of dropdown
             if (types.get(criteriaTypes[i])[0] == null) {
                 valueLength = values[i].length();
-                out += "<td style=\"max-width:100%;white-space:nowrap\">"
-                    + "<input name=\"" + studentID + "_" + i + "\" type=\"text\""
-                    + " class=\"value\" style=\"resize:horizontal\" value='"
-                    + values[i] + "' maxlength='500'"
+                out += "<td style='max-width:100%;white-space:nowrap'>"
+                    + "<input name='" + studentID + "_" + i + "' type='text'"
+                    + " class='value' value='" + values[i] + "' maxlength='500'"
                     + " size='" + (valueLength < 10 ? 10 : valueLength)
                     + "' onkeyup='resizeInput(this)'></td>\n";
                 continue;
@@ -158,13 +157,21 @@ public class Assignment extends PrivateServlet {
                     + " class='value' value='" + values[i] + "'></td>\n";
                 continue;
             }
-            out += "<td style=\"max-width:100%;white-space:nowrap\">"
-                + "<div class=\"dropdown\">\n"
-                    + "<button type=\"button\" class=\"dropbtn\""
-                    + " style=\"resize:horizontal\">" + (!values[i].isEmpty() ? values[i] : "[Dropdown]") + "</button>\n"
-                    + "<input name=\"" + studentID + "_" + i + "\" type=\"hidden\""
-                    + " value=\"" + values[i] + "\" class=\"value\">\n"
-                    + "<div class=\"dropdown-content\">\n";
+            // if type is checkbox, make checkbox
+            if (types.get(criteriaTypes[i])[0].equals("////checkbox////")) {
+                out += "<td style='max-width:100%;white-space:nowrap'>"
+                    + "<input name='" + studentID + "_" + i + "' type='checkbox'"
+                    + " onclick='isSaved = false' value='x' class='value' "
+                    + (!values[i].isEmpty() ? "checked" : "") + "></td>\n";
+                continue;
+            }
+            out += "<td style='max-width:100%;white-space:nowrap'>"
+                + "<div class='dropdown'>\n"
+                    + "<button type='button' class='dropbtn'"
+                    + " style='resize:horizontal'>" + (!values[i].isEmpty() ? values[i] : "[Dropdown]") + "</button>\n"
+                    + "<input name='" + studentID + "_" + i + "' type='hidden'"
+                    + " value='" + values[i] + "' class='value'>\n"
+                    + "<div class='dropdown-content'>\n";
             for (String j : types.get(criteriaTypes[i])) {
                 if (j == null) break;
                 out += "<a onclick=\"setValue(this)\">" + j + "</a>";

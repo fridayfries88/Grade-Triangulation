@@ -24,7 +24,7 @@
         </table>
         <button type="submit">Save</button>
         <button type="button" onclick="backToClasses()">Back to classes</button>
-        <button type="button" onclick="window.location = '/download-assignment'">Download this table</button>
+        <button type="submit" name="download">Download this table</button>
         </form>
     </center>
     <script>

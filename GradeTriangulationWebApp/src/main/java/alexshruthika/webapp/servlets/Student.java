@@ -133,6 +133,14 @@ public class Student extends PrivateServlet {
                     + value + "\" size='7' onkeydown='isSaved = false'></td>\n";
                 continue;
             }
+            // if type is checkbox, make checkbox
+            if (types.get(criteriaTypes[i])[0].equals("////checkbox////")) {
+                out += "<td style='max-width:100%;white-space:nowrap'>"
+                    + "<input name='" + assignmentID + "_" + i + "' type='checkbox'"
+                    + " onclick='isSaved = false' value='x' class='value' "
+                    + (!value.isEmpty() ? "checked" : "") + "></td>\n";
+                continue;
+            }
             out += "<td style=\"white-space:nowrap\">"
                 + "<div class=\"dropdown\">\n"
                 + "<button type=\"button\" class=\"dropbtn\""
