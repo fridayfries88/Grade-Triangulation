@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
     <link href="/styles/dropdown.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/styles/data-table.css" type="text/css">
+    <link rel="stylesheet" href="/styles/assignment.css" type="text/css">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%=request.getAttribute("name")%></title>

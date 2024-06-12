@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
     <link href="/styles/dropdown.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/styles/data-table.css" type="text/css">
+    <link rel="stylesheet" href="/styles/student.css" type="text/css">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%=request.getAttribute("name")%></title>
@@ -16,7 +16,7 @@
     <center>
         <h1><%=request.getAttribute("name")%></h1>
         <form action="/save-student" method="post" style="display:inline-block">
-            <div align="left">
+            <div align="left" class="assignments">
                 <%=request.getAttribute("rows")%>
             </div>
             <button type="submit">Save</button>
