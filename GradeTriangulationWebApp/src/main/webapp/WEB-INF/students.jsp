@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" href="/styles/generic.css" type="text/css">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%=request.getAttribute("courseCode")%> - students</title>

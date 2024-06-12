@@ -1,0 +1,37 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 12, 2024, 9:01:01 a.m.
+    Author     : alexp
+*/
+
+body {
+    background-color: #f7f9fc;
+    font-family: Arial, sans-serif;
+}
+
+input[type="text"] {
+    padding: 12px 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333333;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #eee;
+}

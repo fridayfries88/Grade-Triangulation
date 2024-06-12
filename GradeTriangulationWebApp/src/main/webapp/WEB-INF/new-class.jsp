@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" href="/styles/generic.css" type="text/css">
     <head>
         <title>New Class</title>
         <meta charset="UTF-8">
